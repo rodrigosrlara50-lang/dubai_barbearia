@@ -1,0 +1,1206 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dubai Barbearia Itu | A Barbearia #1 em Itu — Nota 5.0 no Google</title>
+    <meta name="description" content="Dubai Barbearia Itu: A barbearia número 1 de Itu com nota 5.0 no Google. Corte clássico, barba com toalha quente, Combo Dubai. Av. Prudente de Moraes, Vila Nova.">
+    <meta name="keywords" content="barbearia itu, barbearia dubai itu, corte de cabelo itu, barba itu, barbearia premium itu">
+    <meta property="og:title" content="Dubai Barbearia Itu | A Barbearia #1 em Itu">
+    <meta property="og:description" content="Onde o estilo tradicional encontra a sofisticação moderna. Nota 5.0 no Google com 49 avaliações.">
+    <meta property="og:type" content="website">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* ============================================
+           DESIGN SYSTEM — DUBAI BARBEARIA
+        ============================================ */
+        :root {
+            --black:     #0a0a0a;
+            --dark:      #111111;
+            --graphite:  #1a1a1a;
+            --surface:   #222222;
+            --gold:      #c5a059;
+            --gold-light:#e8c988;
+            --bronze:    #b08d57;
+            --cream:     #f0ece4;
+            --muted:     #6b6b6b;
+            --border:    rgba(197,160,89,0.15);
+
+            --font-serif: 'Cinzel', Georgia, serif;
+            --font-sans:  'Inter', system-ui, sans-serif;
+
+            --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+            --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            background-color: var(--black);
+            color: var(--cream);
+            font-family: var(--font-sans);
+            font-weight: 300;
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        ::selection { background: var(--gold); color: var(--black); }
+
+        /* ── SCROLLBAR ── */
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: var(--dark); }
+        ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 2px; }
+
+        /* ── TYPOGRAPHY ── */
+        h1, h2, h3, h4 { font-family: var(--font-serif); font-weight: 700; line-height: 1.15; }
+
+        /* ── UTILITY ── */
+        .container { max-width: 1280px; margin: 0 auto; padding: 0 2rem; }
+        .gold { color: var(--gold); }
+        .gold-gradient {
+            background: linear-gradient(135deg, var(--bronze) 0%, var(--gold) 50%, var(--gold-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* ── BUTTONS ── */
+        .btn {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            padding: 0.85rem 2.2rem;
+            font-family: var(--font-sans);
+            font-size: 0.75rem; font-weight: 700;
+            letter-spacing: 0.18em; text-transform: uppercase;
+            border: none; cursor: pointer;
+            text-decoration: none;
+            transition: all 0.35s var(--ease-smooth);
+            position: relative; overflow: hidden;
+        }
+        .btn::after {
+            content: ''; position: absolute; inset: 0;
+            background: rgba(255,255,255,0.08);
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+        .btn:hover::after { transform: translateX(0); }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--bronze), var(--gold), var(--gold-light));
+            background-size: 200% auto;
+            color: var(--black);
+        }
+        .btn-primary:hover {
+            background-position: right center;
+            box-shadow: 0 0 28px rgba(197, 160, 89, 0.45);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid rgba(197, 160, 89, 0.5);
+            color: var(--cream);
+        }
+        .btn-outline:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+            transform: translateY(-2px);
+        }
+
+        .btn-dark {
+            background: var(--black);
+            color: var(--gold);
+            border: 1px solid rgba(197,160,89,0.3);
+        }
+        .btn-dark:hover {
+            background: var(--graphite);
+            color: var(--gold-light);
+            border-color: var(--gold);
+        }
+
+        /* ── SECTION LABEL ── */
+        .section-label {
+            display: flex; align-items: center; gap: 1rem;
+            font-size: 0.7rem; font-weight: 600;
+            letter-spacing: 0.35em; text-transform: uppercase;
+            color: var(--gold); margin-bottom: 1.25rem;
+        }
+        .section-label::before {
+            content: ''; display: block;
+            width: 2.5rem; height: 1px;
+            background: var(--gold);
+        }
+
+        /* ── DIVIDER ── */
+        .divider {
+            width: 3rem; height: 1px;
+            background: linear-gradient(to right, var(--gold), transparent);
+            margin: 1.5rem 0;
+        }
+
+        /* ── SCROLL REVEAL ── */
+        .reveal { opacity: 0; transform: translateY(2rem); transition: opacity 0.7s var(--ease-smooth), transform 0.7s var(--ease-smooth); }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        .reveal-left { opacity: 0; transform: translateX(-3rem); transition: opacity 0.8s var(--ease-smooth), transform 0.8s var(--ease-smooth); }
+        .reveal-left.visible { opacity: 1; transform: translateX(0); }
+        .reveal-right { opacity: 0; transform: translateX(3rem); transition: opacity 0.8s var(--ease-smooth), transform 0.8s var(--ease-smooth); }
+        .reveal-right.visible { opacity: 1; transform: translateX(0); }
+
+
+        /* ========================================
+           HEADER
+        ======================================== */
+        #header {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            height: 5.5rem;
+            display: flex; align-items: center;
+            background: rgba(10, 10, 10, 0.0);
+            border-bottom: 1px solid transparent;
+            transition: background 0.4s ease, border-color 0.4s ease;
+        }
+        #header.scrolled {
+            background: rgba(10, 10, 10, 0.92);
+            backdrop-filter: blur(16px);
+            border-bottom-color: var(--border);
+        }
+        .header-inner {
+            width: 100%; max-width: 1280px; margin: 0 auto;
+            padding: 0 2rem;
+            display: flex; align-items: center; justify-content: space-between;
+            gap: 2rem;
+        }
+        .logo {
+            display: flex; align-items: center; gap: 0.75rem;
+            text-decoration: none; flex-shrink: 0;
+        }
+        .logo-text {
+            font-family: var(--font-serif);
+            font-size: 1.5rem; font-weight: 900;
+            letter-spacing: 0.15em; text-transform: uppercase;
+            color: var(--gold);
+        }
+        .logo-sub {
+            font-size: 0.65rem; font-weight: 500;
+            letter-spacing: 0.25em; text-transform: uppercase;
+            color: var(--muted);
+            border-left: 1px solid #333;
+            padding-left: 0.75rem; margin-left: 0.25rem;
+        }
+        .nav-links { display: flex; align-items: center; gap: 2.5rem; }
+        .nav-links a {
+            font-size: 0.7rem; font-weight: 500;
+            letter-spacing: 0.2em; text-transform: uppercase;
+            color: rgba(240,236,228,0.6);
+            text-decoration: none;
+            transition: color 0.25s ease;
+            position: relative;
+        }
+        .nav-links a::after {
+            content: ''; position: absolute; bottom: -4px; left: 0;
+            width: 0; height: 1px; background: var(--gold);
+            transition: width 0.3s ease;
+        }
+        .nav-links a:hover { color: var(--gold); }
+        .nav-links a:hover::after { width: 100%; }
+
+        .header-actions { display: flex; align-items: center; gap: 1.5rem; }
+        .social-links { display: flex; gap: 1rem; }
+        .social-links a {
+            width: 2rem; height: 2rem;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--muted); font-size: 0.9rem;
+            transition: color 0.25s ease;
+            text-decoration: none;
+        }
+        .social-links a:hover { color: var(--gold); }
+        .social-links a.whatsapp:hover { color: #25d366; }
+
+        /* Mobile menu */
+        #menu-toggle {
+            display: none; background: none; border: none;
+            color: var(--cream); cursor: pointer; font-size: 1.3rem;
+            padding: 0.25rem;
+        }
+        #mobile-nav {
+            display: none; position: fixed;
+            top: 5.5rem; left: 0; right: 0; z-index: 999;
+            background: rgba(10,10,10,0.97);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
+            padding: 2rem;
+            flex-direction: column; gap: 1.5rem;
+        }
+        #mobile-nav.open { display: flex; }
+        #mobile-nav a {
+            font-size: 0.8rem; font-weight: 600;
+            letter-spacing: 0.2em; text-transform: uppercase;
+            color: rgba(240,236,228,0.7);
+            text-decoration: none;
+            transition: color 0.25s;
+        }
+        #mobile-nav a:hover { color: var(--gold); }
+
+
+        /* ========================================
+           HERO
+        ======================================== */
+        #hero {
+            position: relative; height: 100vh; min-height: 700px;
+            display: flex; align-items: center; justify-content: center;
+            overflow: hidden;
+        }
+        #hero-bg {
+            position: absolute; inset: 0;
+            background-size: cover; background-position: center;
+            will-change: transform;
+        }
+        #hero-bg img {
+            width: 100%; height: 100%; object-fit: cover;
+            transform: scale(1.05); /* parallax initial */
+        }
+        .hero-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(
+                to bottom,
+                rgba(10,10,10,0.55) 0%,
+                rgba(10,10,10,0.40) 40%,
+                rgba(10,10,10,0.80) 80%,
+                rgba(10,10,10,1.00) 100%
+            );
+        }
+        .hero-content {
+            position: relative; z-index: 2;
+            text-align: center;
+            max-width: 860px;
+            padding: 0 1.5rem;
+        }
+        .hero-eyebrow {
+            font-family: var(--font-serif);
+            font-size: 0.75rem; font-weight: 400;
+            letter-spacing: 0.4em; text-transform: uppercase;
+            color: var(--gold); margin-bottom: 1.75rem;
+            opacity: 0; animation: fadeUp 0.9s 0.3s var(--ease-smooth) forwards;
+        }
+        .hero-title {
+            font-size: clamp(2.5rem, 7vw, 5.5rem);
+            font-weight: 900; line-height: 1.08;
+            color: #fff; letter-spacing: 0.02em;
+            margin-bottom: 1.5rem;
+            opacity: 0; animation: fadeUp 0.9s 0.5s var(--ease-smooth) forwards;
+        }
+        .hero-sub {
+            font-size: clamp(1rem, 2.5vw, 1.25rem);
+            font-weight: 300; color: rgba(240,236,228,0.75);
+            max-width: 580px; margin: 0 auto 2.5rem;
+            opacity: 0; animation: fadeUp 0.9s 0.7s var(--ease-smooth) forwards;
+        }
+        .hero-ctas {
+            display: flex; flex-wrap: wrap; gap: 1rem;
+            justify-content: center;
+            opacity: 0; animation: fadeUp 0.9s 0.9s var(--ease-smooth) forwards;
+        }
+        .hero-scroll {
+            position: absolute; bottom: 2.5rem; left: 50%;
+            transform: translateX(-50%);
+            display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+            font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase;
+            color: var(--muted); animation: bounce 2s infinite;
+            text-decoration: none; z-index: 2;
+        }
+        .hero-scroll i { font-size: 1rem; color: var(--gold); }
+
+        /* Marquee ticker */
+        .marquee-wrap {
+            position: relative; overflow: hidden;
+            background: var(--gold);
+            padding: 0.65rem 0;
+        }
+        .marquee-track {
+            display: flex; white-space: nowrap;
+            animation: marqueeScroll 30s linear infinite;
+        }
+        .marquee-item {
+            display: inline-flex; align-items: center; gap: 1.25rem;
+            font-size: 0.65rem; font-weight: 700;
+            letter-spacing: 0.25em; text-transform: uppercase;
+            color: var(--black); padding: 0 2.5rem;
+        }
+        .marquee-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--black); opacity: 0.4; }
+
+
+        /* ========================================
+           NOSSA MARCA
+        ======================================== */
+        #marca {
+            padding: 8rem 0;
+            background: var(--dark);
+        }
+        .marca-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem; align-items: center;
+        }
+        .marca-img-wrap {
+            position: relative;
+        }
+        .marca-img-frame {
+            position: relative;
+            border-radius: 2px;
+            overflow: hidden;
+            height: 600px;
+        }
+        .marca-img-frame img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            filter: grayscale(15%);
+            transition: filter 0.6s ease, transform 0.6s ease;
+        }
+        .marca-img-frame:hover img { filter: grayscale(0); transform: scale(1.02); }
+        .marca-corner-tl, .marca-corner-br {
+            position: absolute; width: 4rem; height: 4rem;
+            border-color: var(--gold); border-style: solid;
+        }
+        .marca-corner-tl { top: -1rem; left: -1rem; border-width: 2px 0 0 2px; }
+        .marca-corner-br { bottom: -1rem; right: -1rem; border-width: 0 2px 2px 0; }
+        .marca-badge {
+            position: absolute; bottom: 2rem; right: -2rem;
+            background: var(--black);
+            border: 1px solid var(--border);
+            padding: 1.25rem 1.75rem;
+            display: flex; flex-direction: column; align-items: center; gap: 0.25rem;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+        }
+        .marca-badge-stars { color: var(--gold); font-size: 0.8rem; letter-spacing: 2px; }
+        .marca-badge-score { font-family: var(--font-serif); font-size: 2rem; color: var(--gold); font-weight: 900; }
+        .marca-badge-label { font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); }
+
+        .marca-text h2 { font-size: clamp(2rem, 4vw, 3.5rem); color: #fff; margin-bottom: 2rem; }
+        .marca-text p { color: rgba(240,236,228,0.6); font-size: 1rem; margin-bottom: 1.25rem; }
+        .marca-features { margin-top: 2.5rem; display: flex; flex-direction: column; gap: 1rem; }
+        .marca-feature {
+            display: flex; align-items: center; gap: 1rem;
+            font-size: 0.85rem; color: rgba(240,236,228,0.65);
+        }
+        .marca-feature i { color: var(--gold); width: 1rem; flex-shrink: 0; }
+
+
+        /* ========================================
+           SERVIÇOS
+        ======================================== */
+        #servicos {
+            padding: 8rem 0;
+            background: var(--black);
+            position: relative;
+        }
+        #servicos::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+            background: linear-gradient(to right, transparent, var(--gold), transparent);
+        }
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem; margin-top: 4rem;
+        }
+        .service-card {
+            background: var(--graphite);
+            border: 1px solid rgba(255,255,255,0.05);
+            padding: 2.5rem 2rem;
+            position: relative; overflow: hidden;
+            transition: transform 0.4s var(--ease-smooth), border-color 0.4s ease, box-shadow 0.4s ease;
+            cursor: default;
+        }
+        .service-card::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+            background: linear-gradient(to right, var(--bronze), var(--gold));
+            transform: scaleX(0); transform-origin: left;
+            transition: transform 0.4s var(--ease-smooth);
+        }
+        .service-card:hover { transform: translateY(-6px); border-color: rgba(197,160,89,0.3); box-shadow: 0 16px 48px rgba(0,0,0,0.5); }
+        .service-card:hover::before { transform: scaleX(1); }
+        .service-card.featured {
+            background: linear-gradient(160deg, var(--graphite), #1e1810);
+            border-color: rgba(197,160,89,0.3);
+            box-shadow: 0 0 30px rgba(197,160,89,0.08);
+        }
+        .service-card.featured::before { transform: scaleX(1); }
+        .service-badge {
+            position: absolute; top: 0; right: 0;
+            background: var(--gold); color: var(--black);
+            font-size: 0.55rem; font-weight: 800; letter-spacing: 0.2em; text-transform: uppercase;
+            padding: 0.3rem 0.8rem;
+        }
+        .service-icon-wrap {
+            width: 3rem; height: 3rem;
+            display: flex; align-items: center; justify-content: center;
+            border: 1px solid rgba(197,160,89,0.2);
+            margin-bottom: 1.75rem;
+            transition: border-color 0.3s, background 0.3s;
+        }
+        .service-card:hover .service-icon-wrap { border-color: var(--gold); background: rgba(197,160,89,0.08); }
+        .service-icon-wrap i { color: var(--gold); font-size: 1rem; }
+        .service-card h3 { font-family: var(--font-serif); font-size: 1.1rem; color: #fff; margin-bottom: 0.5rem; }
+        .service-card .tagline { font-size: 0.75rem; color: var(--gold); font-style: italic; margin-bottom: 1rem; }
+        .service-card p { font-size: 0.85rem; color: rgba(240,236,228,0.5); line-height: 1.7; }
+
+
+        /* ========================================
+           DEPOIMENTOS
+        ======================================== */
+        #depoimentos {
+            padding: 8rem 0;
+            background: var(--graphite);
+            position: relative; overflow: hidden;
+        }
+        #depoimentos::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+            background: linear-gradient(to right, transparent, var(--gold), transparent);
+        }
+        .depoimentos-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem; margin-top: 4rem;
+        }
+        .depoimento-card {
+            background: var(--dark);
+            border: 1px solid rgba(255,255,255,0.05);
+            padding: 2rem;
+            position: relative;
+            transition: border-color 0.3s ease, transform 0.3s ease;
+        }
+        .depoimento-card:hover { border-color: rgba(197,160,89,0.2); transform: translateY(-4px); }
+        .depoimento-quote {
+            font-size: 2.5rem; color: var(--gold); opacity: 0.3;
+            font-family: Georgia, serif; line-height: 1;
+            margin-bottom: 1rem;
+        }
+        .depoimento-text { font-size: 0.9rem; color: rgba(240,236,228,0.65); line-height: 1.75; margin-bottom: 1.5rem; }
+        .depoimento-stars { color: var(--gold); font-size: 0.7rem; margin-bottom: 1rem; }
+        .depoimento-author { display: flex; align-items: center; gap: 0.75rem; }
+        .depoimento-avatar {
+            width: 2.5rem; height: 2.5rem; border-radius: 50%;
+            background: linear-gradient(135deg, var(--bronze), var(--gold));
+            display: flex; align-items: center; justify-content: center;
+            font-family: var(--font-serif); font-size: 0.9rem; color: var(--black); font-weight: 700;
+            flex-shrink: 0;
+        }
+        .depoimento-name { font-size: 0.85rem; font-weight: 600; color: #fff; }
+        .depoimento-via { font-size: 0.65rem; color: var(--muted); letter-spacing: 0.1em; }
+
+
+        /* ========================================
+           PROVA SOCIAL / CTA
+        ======================================== */
+        #prova-social {
+            padding: 8rem 0 0;
+            background: var(--dark);
+            text-align: center;
+            position: relative; overflow: hidden;
+        }
+        .prova-glow {
+            position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 700px; height: 700px;
+            background: radial-gradient(circle, rgba(197,160,89,0.07) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .prova-stars { font-size: 1.5rem; color: var(--gold); margin-bottom: 1.5rem; letter-spacing: 0.4rem; }
+        .prova-title {
+            font-size: clamp(3rem, 8vw, 6.5rem);
+            font-weight: 900; color: #fff;
+            line-height: 1.0; margin-bottom: 1.25rem;
+        }
+        .prova-sub { font-size: 1.25rem; color: rgba(240,236,228,0.5); margin-bottom: 5rem; }
+
+        /* Faixa inclinada dinâmica */
+        .faixa-wrap {
+            position: relative;
+            margin: 0 -100px;
+            transform: rotate(-2deg);
+            overflow: hidden;
+        }
+        .faixa-inner {
+            background: linear-gradient(90deg, var(--bronze) 0%, var(--gold) 50%, var(--gold-light) 100%);
+            padding: 2.5rem 6rem;
+            display: flex; align-items: center; justify-content: center; gap: 3rem;
+            flex-wrap: wrap;
+            transform: rotate(2deg);
+        }
+        .faixa-text {
+            font-family: var(--font-serif);
+            font-size: clamp(1.25rem, 3vw, 2rem);
+            font-weight: 900; text-transform: uppercase;
+            letter-spacing: 0.05em; color: var(--black);
+        }
+
+
+        /* ========================================
+           AGENDAR
+        ======================================== */
+        #agendar {
+            padding: 8rem 0;
+            background: var(--black);
+            display: flex; align-items: center; justify-content: center;
+        }
+        .agendar-card {
+            background: var(--graphite);
+            border: 1px solid var(--border);
+            padding: 4rem;
+            max-width: 800px; width: 100%;
+            text-align: center;
+            position: relative;
+        }
+        .agendar-card::before, .agendar-card::after {
+            content: ''; position: absolute; width: 3rem; height: 3rem;
+            border-color: var(--gold); border-style: solid;
+        }
+        .agendar-card::before { top: -1px; left: -1px; border-width: 2px 0 0 2px; }
+        .agendar-card::after  { bottom: -1px; right: -1px; border-width: 0 2px 2px 0; }
+        .agendar-card h2 { font-size: clamp(1.75rem, 4vw, 3rem); color: #fff; margin-bottom: 1rem; }
+        .agendar-card p { color: rgba(240,236,228,0.55); margin-bottom: 2.5rem; max-width: 480px; margin-left: auto; margin-right: auto; }
+        .agendar-info {
+            display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem;
+            margin-bottom: 2.5rem;
+        }
+        .agendar-info-item {
+            display: flex; align-items: center; gap: 0.6rem;
+            font-size: 0.8rem; color: rgba(240,236,228,0.6);
+        }
+        .agendar-info-item i { color: var(--gold); }
+
+
+        /* ========================================
+           FOOTER
+        ======================================== */
+        #footer {
+            background: #060606;
+            border-top: 1px solid rgba(255,255,255,0.04);
+        }
+        .footer-map {
+            height: 320px; width: 100%;
+            filter: grayscale(100%) invert(92%) contrast(83%) brightness(80%) hue-rotate(180deg);
+            opacity: 0.7;
+        }
+        .footer-body {
+            padding: 5rem 0 2rem;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 4rem;
+        }
+        .footer-brand-desc { font-size: 0.85rem; color: var(--muted); margin: 1.25rem 0 1.75rem; line-height: 1.8; }
+        .footer-socials { display: flex; gap: 0.75rem; }
+        .footer-social-btn {
+            width: 2.25rem; height: 2.25rem;
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.8rem; color: var(--muted);
+            text-decoration: none;
+            transition: color 0.25s, border-color 0.25s, background 0.25s;
+        }
+        .footer-social-btn:hover { color: var(--gold); border-color: var(--gold); background: rgba(197,160,89,0.08); }
+        .footer-social-btn.wa:hover { color: #25d366; border-color: #25d366; background: rgba(37,211,102,0.08); }
+
+        .footer-col h4 {
+            font-family: var(--font-serif); font-size: 0.75rem;
+            letter-spacing: 0.2em; text-transform: uppercase;
+            color: #fff; margin-bottom: 1.5rem;
+        }
+        .footer-list { list-style: none; display: flex; flex-direction: column; gap: 0.9rem; }
+        .footer-list li { display: flex; align-items: flex-start; gap: 0.65rem; }
+        .footer-list i { color: var(--gold); font-size: 0.75rem; margin-top: 0.2rem; flex-shrink: 0; }
+        .footer-list span, .footer-list a {
+            font-size: 0.82rem; color: var(--muted);
+            text-decoration: none; line-height: 1.5;
+            transition: color 0.25s;
+        }
+        .footer-list a:hover { color: var(--gold); }
+        .footer-list .highlight { color: #fff; font-weight: 500; }
+
+        .schedule-table { width: 100%; }
+        .schedule-table tr { border-bottom: 1px solid rgba(255,255,255,0.04); }
+        .schedule-table tr:last-child { border: none; }
+        .schedule-table td { padding: 0.5rem 0; font-size: 0.8rem; }
+        .schedule-table td:first-child { color: var(--muted); }
+        .schedule-table td:last-child { text-align: right; color: var(--gold); font-weight: 500; }
+        .schedule-table .closed { color: #ef4444 !important; }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.04);
+            padding: 1.5rem 0;
+            display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+        }
+        .footer-bottom p { font-size: 0.7rem; color: #444; letter-spacing: 0.1em; }
+
+
+        /* ========================================
+           WHATSAPP FAB
+        ======================================== */
+        #whatsapp-fab {
+            position: fixed; bottom: 1.75rem; right: 1.75rem; z-index: 9999;
+            width: 3.5rem; height: 3.5rem; border-radius: 50%;
+            background: #25d366;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.6rem; color: #fff;
+            box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+            text-decoration: none;
+            transition: transform 0.3s var(--ease-bounce), box-shadow 0.3s ease;
+        }
+        #whatsapp-fab:hover { transform: scale(1.1); box-shadow: 0 6px 28px rgba(37,211,102,0.55); }
+        #whatsapp-fab::before {
+            content: ''; position: absolute;
+            width: 100%; height: 100%; border-radius: 50%;
+            background: #25d366; opacity: 0.35;
+            animation: pulse 2s infinite;
+        }
+
+
+        /* ========================================
+           KEYFRAMES
+        ======================================== */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(1.5rem); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50%       { transform: translateX(-50%) translateY(6px); }
+        }
+        @keyframes pulse {
+            0%   { transform: scale(1); opacity: 0.35; }
+            70%  { transform: scale(1.5); opacity: 0; }
+            100% { transform: scale(1.5); opacity: 0; }
+        }
+        @keyframes marqueeScroll {
+            from { transform: translateX(0); }
+            to   { transform: translateX(-50%); }
+        }
+
+
+        /* ========================================
+           RESPONSIVE
+        ======================================== */
+        @media (max-width: 1024px) {
+            .services-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+            .marca-grid { grid-template-columns: 1fr; gap: 4rem; }
+            .marca-badge { right: 1rem; }
+        }
+        @media (max-width: 768px) {
+            .nav-links, .header-actions .btn, .social-links { display: none; }
+            #menu-toggle { display: block; }
+            .depoimentos-grid { grid-template-columns: 1fr; }
+            .services-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr; }
+            .faixa-inner { flex-direction: column; padding: 2.5rem 2rem; text-align: center; }
+            .agendar-card { padding: 2.5rem 1.5rem; }
+            .marca-img-frame { height: 400px; }
+            .marca-badge { position: static; margin-top: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ==============================
+     HEADER
+============================== -->
+<header id="header">
+    <div class="header-inner">
+        <a href="#home" class="logo">
+            <span class="logo-text">Dubai</span>
+            <span class="logo-sub">Barbearia · Itu</span>
+        </a>
+
+        <nav class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#marca">Nossa Marca</a>
+            <a href="#servicos">Serviços</a>
+            <a href="#depoimentos">Avaliações</a>
+            <a href="#footer">Localização</a>
+        </nav>
+
+        <div class="header-actions">
+            <div class="social-links">
+                <a href="https://instagram.com" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://wa.me/5511910826468" target="_blank" class="whatsapp" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            </div>
+            <a href="#agendar" class="btn btn-outline" style="padding:0.6rem 1.4rem">Agendar Online</a>
+        </div>
+
+        <button id="menu-toggle" aria-label="Menu"><i class="fas fa-bars"></i></button>
+    </div>
+</header>
+
+<!-- Mobile nav -->
+<nav id="mobile-nav">
+    <a href="#home" onclick="closeMobileNav()">Home</a>
+    <a href="#marca" onclick="closeMobileNav()">Nossa Marca</a>
+    <a href="#servicos" onclick="closeMobileNav()">Serviços</a>
+    <a href="#depoimentos" onclick="closeMobileNav()">Avaliações</a>
+    <a href="#footer" onclick="closeMobileNav()">Localização</a>
+    <a href="#agendar" class="btn btn-primary" onclick="closeMobileNav()" style="text-align:center">Agendar Online</a>
+</nav>
+
+
+<!-- ==============================
+     HERO
+============================== -->
+<section id="home">
+    <div id="hero">
+        <div id="hero-bg">
+            <img src="hero_barber.png" alt="Atendimento de barbearia profissional na Dubai Barbearia Itu" onerror="this.parentElement.style.background='linear-gradient(160deg,#1a1208 0%,#0a0a0a 100%)'">
+        </div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <p class="hero-eyebrow">⸻ Dubai Barbearia &nbsp;·&nbsp; Itu, SP ⸻</p>
+            <h1 class="hero-title">
+                Onde o <span class="gold-gradient">estilo tradicional</span><br>encontra a sofisticação moderna.
+            </h1>
+            <p class="hero-sub">
+                Mais do que um corte. Um ritual de autocuidado em um espaço pensado para o cavalheiro contemporâneo.
+            </p>
+            <div class="hero-ctas">
+                <a href="https://wa.me/5511910826468" target="_blank" class="btn btn-primary">
+                    <i class="fab fa-whatsapp"></i> Agendar via WhatsApp
+                </a>
+                <a href="#servicos" class="btn btn-outline">Ver Serviços</a>
+            </div>
+        </div>
+        <a href="#marca" class="hero-scroll">
+            <span>Descubra</span>
+            <i class="fas fa-chevron-down"></i>
+        </a>
+    </div>
+
+    <!-- Marquee Ticker -->
+    <div class="marquee-wrap">
+        <div class="marquee-track">
+            <!-- Repeat items twice for seamless loop -->
+            <span class="marquee-item">Dubai Barbearia <span class="marquee-dot"></span></span>
+            <span class="marquee-item">Corte Clássico <span class="marquee-dot"></span></span>
+            <span class="marquee-item">Barba com Toalha Quente <span class="marquee-dot"></span></span>
+            <span class="marquee-item">Combo Dubai <span class="marquee-dot"></span></span>
+            <span class="marquee-item">Nota 5.0 no Google <span class="marquee-dot"></span></span>
+            <span class="marquee-item">A Barbearia #1 de Itu <span class="marquee-dot"></span></span>
+            <span class="marquee-item">Itu · SP <span class="marquee-dot"></span></span>
+            <span class="marquee-item">Selagem &amp; Tratamentos <span class="marquee-dot"></span></span>
+            <!-- duplicate for loop -->
+            <span class="marquee-item">Dubai Barbearia <span class="marquee-dot"></span></span>
+            <span class="marquee-item">Corte Clássico <span class="marquee-dot"></span></span>
+            <span class="marquee-item">Barba com Toalha Quente <span class="marquee-dot"></span></span>
+            <span class="marquee-item">Combo Dubai <span class="marquee-dot"></span></span>
+            <span class="marquee-item">Nota 5.0 no Google <span class="marquee-dot"></span></span>
+            <span class="marquee-item">A Barbearia #1 de Itu <span class="marquee-dot"></span></span>
+            <span class="marquee-item">Itu · SP <span class="marquee-dot"></span></span>
+            <span class="marquee-item">Selagem &amp; Tratamentos <span class="marquee-dot"></span></span>
+        </div>
+    </div>
+</section>
+
+
+<!-- ==============================
+     NOSSA MARCA
+============================== -->
+<section id="marca">
+    <div class="container">
+        <div class="marca-grid">
+
+            <!-- Imagem -->
+            <div class="marca-img-wrap reveal-left">
+                <div class="marca-corner-tl"></div>
+                <div class="marca-corner-br"></div>
+                <div class="marca-img-frame">
+                    <img src="vintage_chair.png" alt="Ambiente premium e cadeiras vintage da Dubai Barbearia" onerror="this.style.background='linear-gradient(160deg,#2a1f10,#1a1a1a)'">
+                </div>
+                <div class="marca-badge">
+                    <span class="marca-badge-stars">★★★★★</span>
+                    <span class="marca-badge-score">5.0</span>
+                    <span class="marca-badge-label">Google Reviews</span>
+                </div>
+            </div>
+
+            <!-- Texto -->
+            <div class="reveal-right">
+                <div class="section-label">A Essência Dubai</div>
+                <h2>Tradição,<br>Exclusividade<br>e Excelência.</h2>
+                <div class="divider"></div>
+
+                <p>Inspirada na grandiosidade e na busca incessante pela perfeição, a Dubai Barbearia redefine o conceito de grooming masculino em Itu. Nós acreditamos que a verdadeira elegância reside nos detalhes.</p>
+                <p>Aqui, resgatamos a essência das barbearias clássicas e a fundimos com um padrão de serviço internacional. Sinta o peso da navalha afiada, o conforto do vapor da toalha quente e desfrute de uma cerveja estupidamente gelada em nossas cadeiras de couro vintage.</p>
+                <p>Na Dubai, não entregamos apenas um corte de cabelo impecável. Nós proporcionamos um refúgio exclusivo — um momento seu, de relaxamento absoluto.</p>
+
+                <div class="marca-features">
+                    <div class="marca-feature"><i class="fas fa-check-circle"></i><span>Navalha afiada e técnica refinada</span></div>
+                    <div class="marca-feature"><i class="fas fa-check-circle"></i><span>Toalha quente e massagem facial</span></div>
+                    <div class="marca-feature"><i class="fas fa-check-circle"></i><span>Cerveja gelada cortesia da casa</span></div>
+                    <div class="marca-feature"><i class="fas fa-check-circle"></i><span>Produtos premium exclusivos</span></div>
+                    <div class="marca-feature"><i class="fas fa-check-circle"></i><span>Atendimento personalizado e consultivo</span></div>
+                </div>
+
+                <div style="margin-top:2.5rem">
+                    <a href="#agendar" class="btn btn-primary">Agendar Meu Horário</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- ==============================
+     SERVIÇOS
+============================== -->
+<section id="servicos">
+    <div class="container">
+        <div class="reveal" style="text-align:center; max-width:700px; margin:0 auto">
+            <div class="section-label" style="justify-content:center">O Ritual</div>
+            <h2 style="font-size:clamp(2rem,5vw,3.5rem); color:#fff; margin-bottom:1rem">Nossos Serviços</h2>
+            <p style="color:rgba(240,236,228,0.5); font-size:1rem">
+                Excelência em cada detalhe. Cada atendimento é um ritual personalizado de renovação.
+            </p>
+        </div>
+
+        <div class="services-grid">
+
+            <!-- Serviço 1 -->
+            <div class="service-card reveal" style="transition-delay:0.1s">
+                <div class="service-icon-wrap"><i class="fas fa-cut"></i></div>
+                <h3>Corte Clássico &amp; Moderno</h3>
+                <p class="tagline">A precisão que o seu estilo exige.</p>
+                <p>Atendimento consultivo, lavagem relaxante, corte impecável e finalização com produtos premium selecionados para o seu tipo de cabelo.</p>
+            </div>
+
+            <!-- Serviço 2 -->
+            <div class="service-card reveal" style="transition-delay:0.2s">
+                <div class="service-icon-wrap"><i class="fas fa-spa"></i></div>
+                <h3>Barboterapia Clássica</h3>
+                <p class="tagline">O ritual da toalha quente e navalha.</p>
+                <p>Tratamento profundo com toalha aquecida, massagem facial revigorante e o deslizar suave e preciso da navalha tradicional afiada.</p>
+            </div>
+
+            <!-- Serviço 3 (DESTAQUE) -->
+            <div class="service-card featured reveal" style="transition-delay:0.3s">
+                <span class="service-badge">Assinatura</span>
+                <div class="service-icon-wrap" style="border-color:rgba(197,160,89,0.5)">
+                    <i class="fas fa-crown" style="color:var(--gold-light)"></i>
+                </div>
+                <h3>O Combo Dubai</h3>
+                <p class="tagline">Cabelo, Barba &amp; Experiência Completa.</p>
+                <p>A assinatura da casa. Uma renovação completa de visual e energia para quem não abre mão do melhor. Inclui cerveja gelada cortesia.</p>
+            </div>
+
+            <!-- Serviço 4 -->
+            <div class="service-card reveal" style="transition-delay:0.4s">
+                <div class="service-icon-wrap"><i class="fas fa-magic"></i></div>
+                <h3>Selagem &amp; Tratamentos</h3>
+                <p class="tagline">Cuidado avançado para seus fios.</p>
+                <p>Redução de volume, hidratação profunda e alinhamento dos fios, garantindo um visual impecável e saudável por muito mais tempo.</p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- ==============================
+     DEPOIMENTOS
+============================== -->
+<section id="depoimentos">
+    <div class="container">
+        <div class="reveal" style="text-align:center; max-width:700px; margin:0 auto">
+            <div class="section-label" style="justify-content:center">Avaliações Reais</div>
+            <h2 style="font-size:clamp(2rem,5vw,3.5rem); color:#fff; margin-bottom:1rem">O Que Nossos Clientes Dizem</h2>
+            <p style="color:rgba(240,236,228,0.5)">
+                49 avaliações no Google. Nota 5.0. Satisfação garantida ou não cobramos.
+            </p>
+        </div>
+
+        <div class="depoimentos-grid">
+
+            <div class="depoimento-card reveal" style="transition-delay:0.1s">
+                <div class="depoimento-quote">"</div>
+                <p class="depoimento-text">Simplesmente o melhor atendimento que já tive em uma barbearia. Ambiente top, barbeiro atencioso, e saí com o cabelo e barba impecáveis. Já sou cliente fiel!</p>
+                <div class="depoimento-stars">★★★★★</div>
+                <div class="depoimento-author">
+                    <div class="depoimento-avatar">RC</div>
+                    <div>
+                        <div class="depoimento-name">Rafael C.</div>
+                        <div class="depoimento-via">via Google Reviews</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="depoimento-card reveal" style="transition-delay:0.2s">
+                <div class="depoimento-quote">"</div>
+                <p class="depoimento-text">Fui pela primeira vez e fiquei impressionado com o nível de qualidade. A toalha quente na barba é uma experiência à parte. Lugar de alto padrão em Itu, sem dúvida.</p>
+                <div class="depoimento-stars">★★★★★</div>
+                <div class="depoimento-author">
+                    <div class="depoimento-avatar">LM</div>
+                    <div>
+                        <div class="depoimento-name">Lucas M.</div>
+                        <div class="depoimento-via">via Google Reviews</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="depoimento-card reveal" style="transition-delay:0.3s">
+                <div class="depoimento-quote">"</div>
+                <p class="depoimento-text">O Combo Dubai é incrível! Saí renovado, com cabelo e barba perfeitos. A cerveja gelada no final é o detalhe que faz toda a diferença. Recomendo demais!</p>
+                <div class="depoimento-stars">★★★★★</div>
+                <div class="depoimento-author">
+                    <div class="depoimento-avatar">GP</div>
+                    <div>
+                        <div class="depoimento-name">Gustavo P.</div>
+                        <div class="depoimento-via">via Google Reviews</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- ==============================
+     PROVA SOCIAL + CTA FAIXA
+============================== -->
+<section id="prova-social">
+    <div class="prova-glow"></div>
+    <div class="container" style="position:relative;z-index:1">
+        <div class="prova-stars reveal">★ ★ ★ ★ ★</div>
+        <h2 class="prova-title reveal">
+            A Barbearia<br><span class="gold-gradient">#1 de Itu</span><br>no Google
+        </h2>
+        <p class="prova-sub reveal">
+            Nota Máxima <strong style="color:var(--gold)">5.0</strong> baseada em <strong style="color:#fff">49 avaliações</strong> de clientes reais.
+        </p>
+    </div>
+
+    <!-- Faixa Dourada Inclinada -->
+    <div class="faixa-wrap">
+        <div class="faixa-inner">
+            <span class="faixa-text">Venha Viver A Experiência Dubai</span>
+            <a href="https://wa.me/5511910826468" target="_blank" class="btn btn-dark">
+                <i class="fab fa-whatsapp" style="font-size:1rem"></i>
+                Agende Seu Horário
+            </a>
+        </div>
+    </div>
+</section>
+
+
+<!-- ==============================
+     AGENDAR
+============================== -->
+<section id="agendar">
+    <div class="container" style="display:flex;justify-content:center">
+        <div class="agendar-card reveal">
+            <div class="section-label" style="justify-content:center; margin-bottom:1.5rem">Agendamento Fácil</div>
+            <h2>Pronto para uma<br>Renovação Completa?</h2>
+            <p>Fale diretamente com a nossa equipe pelo WhatsApp e garanta o seu horário. Rápido, simples e sem complicação.</p>
+
+            <div class="agendar-info">
+                <div class="agendar-info-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Av. Prudente de Moraes, Vila Nova — Itu/SP</span>
+                </div>
+                <div class="agendar-info-item">
+                    <i class="fas fa-clock"></i>
+                    <span>Aberto até as 20:00 horas</span>
+                </div>
+                <div class="agendar-info-item">
+                    <i class="fas fa-phone"></i>
+                    <span>(11) 91082-6468</span>
+                </div>
+            </div>
+
+            <a href="https://wa.me/5511910826468?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20um%20hor%C3%A1rio%20na%20Dubai%20Barbearia%20Itu." target="_blank" class="btn btn-primary" style="font-size:0.8rem; padding:1rem 2.5rem">
+                <i class="fab fa-whatsapp" style="font-size:1rem"></i>
+                Agendar pelo WhatsApp Agora
+            </a>
+        </div>
+    </div>
+</section>
+
+
+<!-- ==============================
+     FOOTER
+============================== -->
+<footer id="footer">
+    <!-- Google Maps Embed -->
+    <iframe
+        class="footer-map"
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3667.4!2d-47.3!3d-23.26!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sAv.+Prudente+de+Moraes%2C+Vila+Nova%2C+Itu+-+SP%2C+13309-050!5e0!3m2!1spt-BR!2sbr!4v1706000000000!5m2!1spt-BR!2sbr"
+        width="100%" height="320"
+        style="border:0; display:block;"
+        allowfullscreen="" loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="Localização Dubai Barbearia Itu">
+    </iframe>
+
+    <div class="footer-body">
+        <div class="container">
+            <div class="footer-grid">
+
+                <!-- Marca -->
+                <div>
+                    <a href="#home" class="logo" style="margin-bottom:0.5rem; display:inline-flex">
+                        <span class="logo-text">Dubai</span>
+                    </a>
+                    <p class="footer-brand-desc">
+                        Onde o estilo tradicional encontra a sofisticação moderna em Itu. Seu novo refúgio de autocuidado, elegância e bom gosto.
+                    </p>
+                    <div class="footer-socials">
+                        <a href="https://instagram.com" target="_blank" class="footer-social-btn" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://wa.me/5511910826468" target="_blank" class="footer-social-btn wa" aria-label="WhatsApp">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        <a href="https://maps.google.com/?q=Av.+Prudente+de+Moraes,+Itu,+SP" target="_blank" class="footer-social-btn" aria-label="Google Maps">
+                            <i class="fab fa-google"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Contato -->
+                <div class="footer-col">
+                    <h4>Contato</h4>
+                    <ul class="footer-list">
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            <div>
+                                <span style="display:block; font-size:0.7rem; color:var(--muted); letter-spacing:0.1em; text-transform:uppercase">WhatsApp / Ligação</span>
+                                <a href="tel:+5511910826468" class="highlight" style="font-size:1rem">(11) 91082-6468</a>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <span>Av. Prudente de Moraes</span><br>
+                                <span>Vila Nova — Itu/SP</span><br>
+                                <span>CEP 13309-050</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Horários -->
+                <div class="footer-col">
+                    <h4>Horários</h4>
+                    <table class="schedule-table">
+                        <tbody>
+                            <tr><td>Seg – Sex</td><td>09:00 – 20:00</td></tr>
+                            <tr><td>Sábado</td><td>08:00 – 18:00</td></tr>
+                            <tr><td>Domingo</td><td class="closed">Fechado</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Links Rápidos -->
+                <div class="footer-col">
+                    <h4>Links Rápidos</h4>
+                    <ul class="footer-list">
+                        <li><i class="fas fa-chevron-right" style="font-size:0.6rem"></i><a href="#marca">Nossa Marca</a></li>
+                        <li><i class="fas fa-chevron-right" style="font-size:0.6rem"></i><a href="#servicos">Serviços</a></li>
+                        <li><i class="fas fa-chevron-right" style="font-size:0.6rem"></i><a href="#depoimentos">Avaliações</a></li>
+                        <li><i class="fas fa-chevron-right" style="font-size:0.6rem"></i><a href="#agendar">Agendar Online</a></li>
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <a href="https://maps.google.com/?q=Av.+Prudente+de+Moraes,+Itu,+SP" target="_blank">Abrir no Google Maps</a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="footer-bottom">
+                <p>© 2024 Dubai Barbearia Itu. Todos os direitos reservados.</p>
+                <p>Nota 5.0 ★★★★★ no Google · Itu, SP</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<!-- ==============================
+     WHATSAPP FLOATING BUTTON
+============================== -->
+<a id="whatsapp-fab" href="https://wa.me/5511910826468?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20um%20hor%C3%A1rio%20na%20Dubai%20Barbearia%20Itu." target="_blank" aria-label="Agendar pelo WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+</a>
+
+
+<!-- ==============================
+     JAVASCRIPT
+============================== -->
+<script>
+    // ── Header scroll effect
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+        header.classList.toggle('scrolled', window.scrollY > 80);
+    }, { passive: true });
+
+    // ── Mobile nav toggle
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileNav = document.getElementById('mobile-nav');
+    menuToggle.addEventListener('click', () => {
+        const isOpen = mobileNav.classList.toggle('open');
+        menuToggle.innerHTML = isOpen ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+    });
+    function closeMobileNav() {
+        mobileNav.classList.remove('open');
+        menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+    }
+
+    // ── Hero parallax
+    const heroBg = document.getElementById('hero-bg');
+    window.addEventListener('scroll', () => {
+        if (heroBg) {
+            const scrolled = window.pageYOffset;
+            heroBg.style.transform = `translateY(${scrolled * 0.4}px)`;
+        }
+    }, { passive: true });
+
+    // ── Scroll reveal
+    const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                revealObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+    revealEls.forEach(el => revealObserver.observe(el));
+
+    // ── Active nav link highlight on scroll
+    const sections = document.querySelectorAll('section[id], footer[id]');
+    const navLinks = document.querySelectorAll('.nav-links a');
+    const sectionObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                navLinks.forEach(link => {
+                    link.style.color = link.getAttribute('href') === `#${entry.target.id}`
+                        ? 'var(--gold)' : '';
+                });
+            }
+        });
+    }, { threshold: 0.4 });
+    sections.forEach(s => sectionObserver.observe(s));
+</script>
+
+</body>
+</html>
