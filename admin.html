@@ -848,12 +848,8 @@
             const dayOfWeek = d.getDay();
             if (dayOfWeek === 0) return []; // Sunday closed
             
-            let startHour = 9;
-            let endHour = 20;
-            if (dayOfWeek === 6) { // Saturday
-                startHour = 8;
-                endHour = 18;
-            }
+            const startHour = 9;
+            const endHour = 20;
             
             const slots = [];
             for (let h = startHour; h < endHour; h++) {

@@ -1304,8 +1304,8 @@
                 Mais do que um corte. Um ritual de autocuidado em um espaço pensado para o cavalheiro contemporâneo.
             </p>
             <div class="hero-ctas">
-                <a href="https://wa.me/5511910826468" target="_blank" class="btn btn-primary">
-                    <i class="fab fa-whatsapp"></i> Agendar via WhatsApp
+                <a href="#agendar" class="btn btn-primary">
+                    <i class="fas fa-calendar-alt"></i> Agendar Horário
                 </a>
                 <a href="#servicos" class="btn btn-outline">Ver Serviços</a>
             </div>
@@ -1859,9 +1859,9 @@
     <div class="faixa-wrap">
         <div class="faixa-inner">
             <span class="faixa-text">Venha Viver A Experiência Dubai</span>
-            <a href="https://wa.me/5511910826468" target="_blank" class="btn btn-dark">
-                <i class="fab fa-whatsapp" style="font-size:1rem"></i>
-                Agende Seu Horário
+            <a href="#agendar" class="btn btn-dark">
+                <i class="fas fa-calendar-alt" style="font-size:1rem"></i>
+                Agendar Horário
             </a>
         </div>
     </div>
@@ -2148,8 +2148,7 @@
                     <h4>Horários</h4>
                     <table class="schedule-table">
                         <tbody>
-                            <tr><td>Seg – Sex</td><td>09:00 – 20:00</td></tr>
-                            <tr><td>Sábado</td><td>08:00 – 18:00</td></tr>
+                            <tr><td>Seg – Sáb</td><td>09:00 – 20:00</td></tr>
                             <tr><td>Domingo</td><td class="closed">Fechado</td></tr>
                         </tbody>
                     </table>
@@ -2470,13 +2469,8 @@
         
         if (dayOfWeek === 0) return []; // Closed on Sunday
         
-        let startHour = 9;
-        let endHour = 20;
-        
-        if (dayOfWeek === 6) { // Saturday
-            startHour = 8;
-            endHour = 18;
-        }
+        const startHour = 9;
+        const endHour = 20;
         
         const slots = [];
         for (let h = startHour; h < endHour; h++) {
@@ -2489,7 +2483,7 @@
     function isSlotAvailable(date, time, profId) {
         const bookings = JSON.parse(localStorage.getItem('dubai_bookings') || '[]');
         if (profId === 'any') {
-            const professionals = ['1', '2', '3', '4'];
+            const professionals = Object.keys(professionalsData).filter(id => id !== 'any');
             return professionals.some(pId => {
                 return !bookings.some(b => b.date === date && b.time === time && b.professionalId === pId);
             });
