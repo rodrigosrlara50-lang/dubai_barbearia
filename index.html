@@ -467,7 +467,7 @@
         }
         .depoimentos-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(4, 1fr);
             gap: 1.5rem; margin-top: 4rem;
         }
         .depoimento-card {
@@ -694,6 +694,7 @@
         ======================================== */
         @media (max-width: 1024px) {
             .services-grid { grid-template-columns: repeat(2, 1fr); }
+            .depoimentos-grid { grid-template-columns: repeat(2, 1fr); }
             .footer-grid { grid-template-columns: 1fr 1fr; }
             .marca-grid { grid-template-columns: 1fr; gap: 4rem; }
             .marca-badge { right: 1rem; }
@@ -709,6 +710,537 @@
             .marca-img-frame { height: 400px; }
             .marca-badge { position: static; margin-top: 1.5rem; }
         }
+
+        /* ── TABS DE FILTRO DE SERVIÇOS ── */
+        .services-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 3.5rem auto 1.5rem;
+            flex-wrap: wrap;
+            max-width: 900px;
+        }
+        .tab-btn {
+            background: transparent;
+            border: 1px solid rgba(197, 160, 89, 0.2);
+            color: var(--cream);
+            padding: 0.7rem 1.6rem;
+            font-family: var(--font-sans);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s var(--ease-smooth);
+            border-radius: 2px;
+        }
+        .tab-btn:hover, .tab-btn.active {
+            background: linear-gradient(135deg, var(--bronze), var(--gold));
+            border-color: var(--gold);
+            color: var(--black);
+            box-shadow: 0 0 20px rgba(197, 160, 89, 0.3);
+            transform: translateY(-1px);
+        }
+        
+        .service-card {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+        }
+        .service-card.hidden {
+            display: none !important;
+        }
+        .service-price-duration {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            font-size: 0.8rem;
+        }
+        .service-price {
+            color: var(--gold-light);
+            font-weight: 700;
+            font-family: var(--font-serif);
+            font-size: 0.95rem;
+            letter-spacing: 0.05em;
+        }
+        .service-duration {
+            color: var(--muted);
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .service-duration i {
+            font-size: 0.75rem;
+            color: var(--gold);
+        }
+
+        /* ── GOOGLE WIDGET CARD ── */
+        .google-widget-card {
+            background: linear-gradient(160deg, var(--graphite) 0%, #1e1810 100%);
+            border: 1px solid rgba(197, 160, 89, 0.35);
+            padding: 2.5rem 2rem;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 16px 48px rgba(0,0,0,0.6);
+            height: 100%;
+        }
+        .google-widget-card::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+            background: linear-gradient(to right, var(--bronze), var(--gold));
+        }
+        .google-widget-header {
+            display: flex;
+            align-items: center;
+            gap: 0.85rem;
+            margin-bottom: 1.5rem;
+        }
+        .google-widget-icon {
+            width: 2.5rem;
+            height: 2.5rem;
+            background: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #4285F4;
+            font-size: 1.3rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+        .google-widget-title {
+            font-family: var(--font-serif);
+            font-size: 1rem;
+            color: #fff;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+        .google-rating-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            margin: 1rem 0;
+        }
+        .google-rating-number {
+            font-size: 3.8rem;
+            font-weight: 900;
+            line-height: 1;
+            color: #fff;
+            font-family: var(--font-serif);
+        }
+        .google-rating-stars {
+            color: var(--gold);
+            font-size: 1.25rem;
+            letter-spacing: 2px;
+            margin: 0.5rem 0;
+        }
+        .google-rating-count {
+            font-size: 0.75rem;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+        .google-widget-status {
+            margin-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.08);
+            padding-top: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.65rem;
+            font-size: 0.8rem;
+        }
+        .google-status-row {
+            display: flex;
+            align-items: center;
+            gap: 0.65rem;
+            color: var(--cream);
+        }
+        .google-status-row i {
+            color: var(--gold);
+            width: 1rem;
+            text-align: center;
+        }
+        .google-status-badge {
+            color: #25d366;
+            font-weight: 600;
+        }
+
+        /* ── AGENDAMENTO WIZARD ── */
+        #booking {
+            position: relative;
+            background: #0b0b0d;
+            border-top: 1px solid var(--border);
+            padding: 8rem 0;
+            overflow: hidden;
+        }
+        .booking-glow {
+            position: absolute; top: 0; left: 50%;
+            transform: translateX(-50%);
+            width: 700px; height: 350px;
+            background: radial-gradient(circle, rgba(197,160,89,0.06) 0%, transparent 75%);
+            pointer-events: none;
+        }
+        .booking-inner {
+            max-width: 860px; margin: 0 auto; padding: 0 1.5rem;
+            position: relative; z-index: 2;
+        }
+        
+        /* Indicators */
+        .step-indicators {
+            display: flex; justify-content: center; align-items: center;
+            margin-bottom: 3.5rem; gap: 0.5rem;
+        }
+        .step-indicator {
+            display: flex; flex-direction: column; align-items: center;
+            position: relative;
+        }
+        .step-circle {
+            width: 2.25rem; height: 2.25rem;
+            border: 1px solid rgba(255,255,255,0.15);
+            background: transparent; color: rgba(255,255,255,0.3);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.8rem; font-weight: 700;
+            transition: all 0.3s ease;
+            border-radius: 50%;
+        }
+        .step-indicator.active .step-circle {
+            border-color: var(--gold);
+            background: var(--gold);
+            color: var(--black);
+            box-shadow: 0 0 15px rgba(197,160,89,0.35);
+        }
+        .step-indicator.completed .step-circle {
+            border-color: var(--gold);
+            background: rgba(197,160,89,0.15);
+            color: var(--gold);
+        }
+        .step-label {
+            font-size: 0.55rem; font-weight: 600;
+            letter-spacing: 0.15em; text-transform: uppercase;
+            margin-top: 0.5rem; color: rgba(240,236,228,0.25);
+            transition: color 0.3s ease;
+        }
+        .step-indicator.active .step-label { color: var(--gold); }
+        .step-indicator.completed .step-label { color: rgba(197,160,89,0.7); }
+        
+        .step-line {
+            width: 5rem; height: 1px;
+            background: rgba(255,255,255,0.08);
+            margin: 0 0.5rem;
+            margin-top: -1.25rem;
+            transition: background 0.5s ease;
+        }
+        .step-indicator.completed + .step-line {
+            background: rgba(197,160,89,0.4);
+        }
+
+        @media (max-width: 576px) {
+            .step-line { width: 2.5rem; }
+            .step-label { display: none; }
+        }
+
+        /* Booking Card/Panel */
+        .booking-panel {
+            background: var(--graphite);
+            border: 1px solid var(--border);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+            position: relative;
+            min-height: 420px;
+            display: flex;
+            flex-direction: column;
+        }
+        .booking-panel::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+        .booking-panel-body {
+            padding: 3rem 2.5rem;
+            flex-grow: 1;
+        }
+        @media (max-width: 576px) {
+            .booking-panel-body { padding: 2rem 1.25rem; }
+        }
+
+        .booking-step-content {
+            display: none;
+        }
+        .booking-step-content.active {
+            display: block;
+            animation: fadeUp 0.4s var(--ease-smooth) forwards;
+        }
+
+        .booking-step-title {
+            font-size: 1.25rem; color: #fff; margin-bottom: 0.25rem; font-family: var(--font-serif);
+        }
+        .booking-step-sub {
+            font-size: 0.8rem; color: var(--muted); margin-bottom: 2rem;
+        }
+
+        /* Selection Lists */
+        .booking-list {
+            display: flex; flex-direction: column; gap: 0.5rem;
+            max-height: 280px; overflow-y: auto;
+            padding-right: 0.5rem;
+            margin-bottom: 2rem;
+        }
+        .booking-list::-webkit-scrollbar { width: 3px; }
+        .booking-list::-webkit-scrollbar-thumb { background: rgba(197,160,89,0.2); }
+        
+        .booking-item-btn {
+            width: 100%; text-align: left;
+            background: var(--black);
+            border: 1px solid rgba(255,255,255,0.04);
+            padding: 1rem 1.25rem;
+            display: flex; justify-content: space-between; align-items: center;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            color: var(--cream);
+        }
+        .booking-item-btn:hover {
+            border-color: rgba(197,160,89,0.25);
+            background: rgba(197,160,89,0.03);
+        }
+        .booking-item-btn.selected {
+            border-color: rgba(197,160,89,0.6);
+            background: rgba(197,160,89,0.08);
+        }
+        .booking-item-name {
+            display: flex; align-items: center; gap: 0.75rem;
+            font-family: var(--font-serif); font-size: 0.9rem;
+        }
+        .booking-item-dot {
+            width: 6px; height: 6px; border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            transition: background 0.25s;
+        }
+        .booking-item-btn.selected .booking-item-dot {
+            background: var(--gold);
+        }
+        .booking-item-price {
+            font-size: 0.85rem; font-weight: 600; color: var(--gold-light);
+        }
+
+        /* Professionals Grid */
+        .professionals-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 0.75rem; margin-bottom: 2rem;
+        }
+        .professional-card {
+            background: var(--black);
+            border: 1px solid rgba(255,255,255,0.04);
+            padding: 1.25rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: left;
+        }
+        .professional-card:hover {
+            border-color: rgba(197,160,89,0.25);
+            background: rgba(197,160,89,0.03);
+        }
+        .professional-card.selected {
+            border-color: rgba(197,160,89,0.6);
+            background: rgba(197,160,89,0.08);
+        }
+        .professional-card-icon {
+            width: 2rem; height: 2rem;
+            border: 1px solid rgba(255,255,255,0.08);
+            display: flex; align-items: center; justify-content: center;
+            color: rgba(255,255,255,0.25);
+            margin-bottom: 0.85rem;
+            transition: all 0.3s;
+        }
+        .professional-card.selected .professional-card-icon {
+            border-color: rgba(197,160,89,0.5);
+            background: rgba(197,160,89,0.15);
+            color: var(--gold);
+        }
+        .professional-name {
+            font-family: var(--font-serif); font-size: 0.95rem; color: #fff;
+            transition: color 0.3s;
+        }
+        .professional-card.selected .professional-name { color: var(--gold-light); }
+        .professional-role {
+            font-size: 0.7rem; color: var(--muted); margin-top: 0.15rem;
+        }
+
+        /* Date / Time Pickers */
+        .dates-scroll {
+            display: flex; gap: 0.5rem; overflow-x: auto;
+            padding-bottom: 0.75rem; margin-bottom: 1.5rem;
+        }
+        .dates-scroll::-webkit-scrollbar { height: 3px; }
+        .dates-scroll::-webkit-scrollbar-thumb { background: rgba(197,160,89,0.2); }
+        
+        .date-btn {
+            flex-shrink: 0; width: 4.5rem;
+            background: var(--black);
+            border: 1px solid rgba(255,255,255,0.04);
+            display: flex; flex-direction: column; align-items: center;
+            cursor: pointer; transition: all 0.3s ease;
+            padding: 0.85rem 0;
+            color: var(--muted);
+        }
+        .date-btn:hover { border-color: rgba(197,160,89,0.25); color: #fff; }
+        .date-btn.selected {
+            border-color: rgba(197,160,89,0.6);
+            background: rgba(197,160,89,0.1);
+            color: #fff;
+        }
+        .date-btn-week { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.08em; }
+        .date-btn-num { font-family: var(--font-serif); font-size: 1.5rem; line-height: 1.1; margin: 0.2rem 0; }
+        .date-btn.selected .date-btn-num { color: var(--gold); }
+        .date-btn-month { font-size: 0.6rem; text-transform: uppercase; }
+
+        .time-slots-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+            gap: 0.5rem;
+            max-height: 160px; overflow-y: auto;
+            padding-right: 0.25rem;
+            margin-bottom: 2rem;
+        }
+        .time-slots-grid::-webkit-scrollbar { width: 3px; }
+        .time-slots-grid::-webkit-scrollbar-thumb { background: rgba(197,160,89,0.15); }
+        
+        .time-slot-btn {
+            padding: 0.6rem 0;
+            background: var(--black);
+            border: 1px solid rgba(255,255,255,0.04);
+            color: var(--muted);
+            font-size: 0.75rem; font-weight: 500; text-align: center;
+            cursor: pointer; transition: all 0.2s;
+        }
+        .time-slot-btn:hover:not(:disabled) { border-color: rgba(197,160,89,0.3); color: #fff; }
+        .time-slot-btn.selected {
+            border-color: rgba(197,160,89,0.6);
+            background: rgba(197,160,89,0.1);
+            color: var(--gold);
+        }
+        .time-slot-btn:disabled {
+            opacity: 0.15; cursor: not-allowed; text-decoration: line-through;
+            border-color: transparent;
+        }
+
+        /* Summary / Form */
+        .booking-summary-box {
+            border: 1px solid rgba(197,160,89,0.15);
+            background: rgba(197,160,89,0.03);
+            padding: 1.25rem 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .summary-title {
+            display: flex; align-items: center; gap: 0.5rem;
+            font-size: 0.65rem; font-weight: 600; text-transform: uppercase;
+            letter-spacing: 0.15em; color: var(--gold);
+            margin-bottom: 1rem;
+        }
+        .summary-grid {
+            display: grid; grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+        .summary-item-label { font-size: 0.55rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }
+        .summary-item-val { font-family: var(--font-serif); font-size: 0.85rem; color: #fff; margin-top: 0.15rem; }
+        .summary-item-val.highlight { color: var(--gold-light); }
+
+        .booking-form {
+            display: flex; flex-direction: column; gap: 1.25rem;
+            margin-bottom: 2rem;
+        }
+        .form-group { display: flex; flex-direction: column; }
+        .form-label {
+            font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.2em;
+            color: var(--muted); margin-bottom: 0.5rem;
+        }
+        .form-input {
+            background: var(--black);
+            border: 1px solid rgba(255,255,255,0.08);
+            color: #fff; padding: 0.85rem 1rem;
+            font-size: 0.85rem; font-family: var(--font-sans);
+            transition: border-color 0.25s;
+        }
+        .form-input:focus { outline: none; border-color: rgba(197,160,89,0.5); }
+        .form-input::placeholder { color: rgba(255,255,255,0.15); }
+
+        /* Navigation buttons */
+        .booking-nav {
+            display: flex; justify-content: space-between; align-items: center;
+            border-top: 1px solid rgba(255,255,255,0.04);
+            padding-top: 1.5rem;
+            margin-top: auto;
+        }
+        .booking-back-btn {
+            background: transparent; border: none;
+            color: var(--muted); font-size: 0.7rem; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 0.15em;
+            display: flex; align-items: center; gap: 0.5rem;
+            cursor: pointer; transition: color 0.25s;
+        }
+        .booking-back-btn:hover { color: #fff; }
+        .booking-next-btn {
+            background: var(--gold); border: none;
+            color: var(--black); font-size: 0.7rem; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 0.15em;
+            padding: 0.85rem 2rem;
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            cursor: pointer; transition: all 0.3s;
+        }
+        .booking-next-btn:hover:not(:disabled) {
+            background: var(--gold-light);
+            box-shadow: 0 0 15px rgba(197,160,89,0.3);
+        }
+        .booking-next-btn:disabled {
+            opacity: 0.3; cursor: not-allowed;
+        }
+
+        /* Success screen */
+        .booking-success-box {
+            display: flex; flex-direction: column; align-items: center;
+            text-align: center; padding: 2rem 0;
+            animation: zoomIn 0.5s ease forwards;
+        }
+        .success-icon-wrap {
+            position: relative; margin-bottom: 2rem;
+        }
+        .success-icon-border {
+            width: 5rem; height: 5rem;
+            border: 1px solid rgba(197,160,89,0.25);
+            display: flex; align-items: center; justify-content: center;
+        }
+        .success-icon-bg {
+            width: 3.5rem; height: 3.5rem;
+            background: rgba(197,160,89,0.08);
+            border: 1px solid rgba(197,160,89,0.4);
+            display: flex; align-items: center; justify-content: center;
+            color: var(--gold); font-size: 1.25rem;
+        }
+        .success-corner-tl, .success-corner-tr, .success-corner-bl, .success-corner-br {
+            position: absolute; width: 0.75rem; height: 0.75rem;
+            border-color: var(--gold); border-style: solid;
+        }
+        .success-corner-tl { top: -0.4rem; left: -0.4rem; border-width: 1px 0 0 1px; }
+        .success-corner-tr { top: -0.4rem; right: -0.4rem; border-width: 1px 1px 0 0; }
+        .success-corner-bl { bottom: -0.4rem; left: -0.4rem; border-width: 0 0 1px 1px; }
+        .success-corner-br { bottom: -0.4rem; right: -0.4rem; border-width: 0 1px 1px 0; }
+
+        .success-title { font-size: 1.75rem; color: #fff; margin-bottom: 0.25rem; font-family: var(--font-serif); }
+        .success-sub { font-size: 0.75rem; color: var(--gold); font-weight: 600; text-transform: uppercase; letter-spacing: 0.2em; margin-bottom: 1.5rem; }
+        .success-desc { font-size: 0.9rem; color: var(--muted); max-width: 320px; line-height: 1.6; margin-bottom: 2rem; }
+        .success-desc strong { color: #fff; }
+        .success-desc .highlight { color: var(--gold-light); }
+        .success-btn {
+            background: transparent; border: none;
+            color: var(--muted); font-size: 0.7rem; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 0.15em;
+            cursor: pointer; transition: color 0.25s;
+            border-bottom: 1px solid transparent;
+        }
+        .success-btn:hover { color: var(--gold-light); border-bottom-color: var(--gold-light); }
     </style>
 </head>
 <body>
@@ -868,45 +1400,346 @@
             <div class="section-label" style="justify-content:center">O Ritual</div>
             <h2 style="font-size:clamp(2rem,5vw,3.5rem); color:#fff; margin-bottom:1rem">Nossos Serviços</h2>
             <p style="color:rgba(240,236,228,0.5); font-size:1rem">
-                Excelência em cada detalhe. Cada atendimento é um ritual personalizado de renovação.
+                Excelência e maestria em cada detalhe. Escolha uma categoria para filtrar nossos rituais.
             </p>
+        </div>
+
+        <!-- Filtros por Categoria -->
+        <div class="services-tabs reveal">
+            <button class="tab-btn active" data-category="todos">Todos</button>
+            <button class="tab-btn" data-category="cabelo">Cabelo</button>
+            <button class="tab-btn" data-category="barba">Barba</button>
+            <button class="tab-btn" data-category="combos">Combos &amp; Visagismo</button>
+            <button class="tab-btn" data-category="cuidados">Estética &amp; Cuidados</button>
         </div>
 
         <div class="services-grid">
 
-            <!-- Serviço 1 -->
-            <div class="service-card reveal" style="transition-delay:0.1s">
-                <div class="service-icon-wrap"><i class="fas fa-cut"></i></div>
-                <h3>Corte Clássico &amp; Moderno</h3>
-                <p class="tagline">A precisão que o seu estilo exige.</p>
-                <p>Atendimento consultivo, lavagem relaxante, corte impecável e finalização com produtos premium selecionados para o seu tipo de cabelo.</p>
-            </div>
-
-            <!-- Serviço 2 -->
-            <div class="service-card reveal" style="transition-delay:0.2s">
-                <div class="service-icon-wrap"><i class="fas fa-spa"></i></div>
-                <h3>Barboterapia Clássica</h3>
-                <p class="tagline">O ritual da toalha quente e navalha.</p>
-                <p>Tratamento profundo com toalha aquecida, massagem facial revigorante e o deslizar suave e preciso da navalha tradicional afiada.</p>
-            </div>
-
-            <!-- Serviço 3 (DESTAQUE) -->
-            <div class="service-card featured reveal" style="transition-delay:0.3s">
-                <span class="service-badge">Assinatura</span>
-                <div class="service-icon-wrap" style="border-color:rgba(197,160,89,0.5)">
-                    <i class="fas fa-crown" style="color:var(--gold-light)"></i>
+            <!-- CATEGORIA: CABELO -->
+            <div class="service-card reveal" data-category="cabelo" style="transition-delay:0.1s">
+                <div>
+                    <div class="service-icon-wrap"><i class="fas fa-cut"></i></div>
+                    <h3>Corte Clássico &amp; Moderno</h3>
+                    <p class="tagline">A precisão que seu estilo exige.</p>
+                    <p>Corte de cabelo sob medida, lavado com shampoo premium e finalizado com pomada ou cera modeladora.</p>
                 </div>
-                <h3>O Combo Dubai</h3>
-                <p class="tagline">Cabelo, Barba &amp; Experiência Completa.</p>
-                <p>A assinatura da casa. Uma renovação completa de visual e energia para quem não abre mão do melhor. Inclui cerveja gelada cortesia.</p>
+                <div class="service-price-duration">
+                    <span class="service-price">R$ 50,00</span>
+                    <span class="service-duration"><i class="fas fa-clock"></i> 30 min</span>
+                </div>
             </div>
 
-            <!-- Serviço 4 -->
-            <div class="service-card reveal" style="transition-delay:0.4s">
-                <div class="service-icon-wrap"><i class="fas fa-magic"></i></div>
-                <h3>Selagem &amp; Tratamentos</h3>
-                <p class="tagline">Cuidado avançado para seus fios.</p>
-                <p>Redução de volume, hidratação profunda e alinhamento dos fios, garantindo um visual impecável e saudável por muito mais tempo.</p>
+            <div class="service-card reveal" data-category="cabelo" style="transition-delay:0.2s">
+                <div>
+                    <div class="service-icon-wrap"><i class="fas fa-magic"></i></div>
+                    <h3>Corte em Degradê (Fade)</h3>
+                    <p class="tagline">Estilo moderno e acabamento perfeito.</p>
+                    <p>Degradê nas laterais com transição limpa e precisa, desenhado de acordo com sua fisionomia.</p>
+                </div>
+                <div class="service-price-duration">
+                    <span class="service-price">R$ 50,00</span>
+                    <span class="service-duration"><i class="fas fa-clock"></i> 30 min</span>
+                </div>
+            </div>
+
+            <div class="service-card reveal" data-category="cabelo" style="transition-delay:0.3s">
+                <div>
+                    <div class="service-icon-wrap"><i class="fas fa-hands"></i></div>
+                    <h3>Especialista em Penteados Afro</h3>
+                    <p class="tagline">Valorização da textura e identidade.</p>
+                    <p>Corte e estilização especializada para cabelos crespos e afros, com definição impecável.</p>
+                </div>
+                <div class="service-price-duration">
+                    <span class="service-price">R$ 50,00</span>
+                    <span class="service-duration"><i class="fas fa-clock"></i> 30 min</span>
+                </div>
+            </div>
+
+            <div class="service-card reveal" data-category="cabelo" style="transition-delay:0.4s">
+                <div>
+                    <div class="service-icon-wrap"><i class="fas fa-scroll"></i></div>
+                    <h3>Cabelos Cacheados</h3>
+                    <p class="tagline">Corte consultivo e natural.</p>
+                    <p>Abordagem específica para cortes em cabelos cacheados, garantindo caimento, leveza e volume ideal.</p>
+                </div>
+                <div class="service-price-duration">
+                    <span class="service-price">R$ 50,00</span>
+                    <span class="service-duration"><i class="fas fa-clock"></i> 30 min</span>
+                </div>
+            </div>
+
+            <div class="service-card reveal" data-category="cabelo" style="transition-delay:0.1s">
+                <div>
+                    <div class="service-icon-wrap"><i class="fas fa-ruler-horizontal"></i></div>
+                    <h3>Corte de Cabelo Longo</h3>
+                    <p class="tagline">Leveza e movimento para os fios.</p>
+                    <p>Corte para cabelos compridos masculinos, focando na higienização, textura e remoção de pontas secas.</p>
+                </div>
+                <div class="service-price-duration">
+                    <span class="service-price">R$ 60,00</span>
+                    <span class="service-duration"><i class="fas fa-clock"></i> 45 min</span>
+                </div>
+            </div>
+
+            <div class="service-card reveal" data-category="cabelo" style="transition-delay:0.2s">
+                <div>
+                    <div class="service-icon-wrap"><i class="fas fa-baby"></i></div>
+                    <h3>Corte Kids (Crianças)</h3>
+                    <p class="tagline">Ambiente descontraído para os pequenos.</p>
+                    <p>Atendimento paciente e cuidadoso para deixar os pequenos estilosos e confortáveis.</p>
+                </div>
+                <div class="service-price-duration">
+                    <span class="service-price">R$ 50,00</span>
+                    <span class="service-duration"><i class="fas fa-clock"></i> 30 min</span>
+                </div>
+            </div>
+
+            <div class="service-card reveal" data-category="cabelo" style="transition-delay:0.3s">
+                <div>
+                    <div class="service-icon-wrap"><i class="fas fa-eraser"></i></div>
+                    <h3>Raspar o Cabelo / Cabeça</h3>
+                    <p class="tagline">Praticidade com acabamento.</p>
+                    <p>Raspar de forma homogênea na máquina com finalização do pezinho e hidratação do couro cabeludo.</p>
+                </div>
+                <div class="service-price-duration">
+                    <span class="service-price">R$ 30,00</span>
+                    <span class="service-duration"><i class="fas fa-clock"></i> 30 min</span>
+                </div>
+            </div>
+
+            <div class="service-card reveal" data-category="cabelo" style="transition-delay:0.4s">
+                <div>
+                    <div class="service-icon-wrap"><i class="fas fa-palette"></i></div>
+                    <h3>Coloração de Cabelo</h3>
+                    <p class="tagline">Renovação de cor e cobertura.</p>
+                    <p>Coloração de fios brancos ou mudança de tom com tinturas profissionais e protetores de couro cabeludo.</p>
+                </div>
+                <div class="service-price-duration">
+                    <span class="service-price">A partir de R$ 60,00</span>
+                    <span class="service-duration"><i class="fas fa-clock"></i> 45 min</span>
+                </div>
+            </div>
+
+            <!-- CATEGORIA: BARBA -->
+            <div class="service-card reveal" data-category="barba" style="transition-delay:0.1s">
+                <div>
+                    <div class="service-icon-wrap"><i class="fas fa-soap"></i></div>
+                    <h3>Barba com Toalha Quente</h3>
+                    <p class="tagline">O clássico ritual da barbearia vintage.</p>
+                    <p>Uso de toalhas aquecidas para abrir os poros, espuma premium hidratante e barbear com navalha tradicional.</p>
+                </div>
+                <div class="service-price-duration">
+                    <span class="service-price">R$ 45,00</span>
+                    <span class="service-duration"><i class="fas fa-clock"></i> 30 min</span>
+                </div>
+            </div>
+
+            <div class="service-card reveal" data-category="barba" style="transition-delay:0.2s">
+                <div>
+                    <div class="service-icon-wrap"><i class="fas fa-sliders-h"></i></div>
+                    <h3>Aparar &amp; Manutenção de Barba</h3>
+                    <p class="tagline">Desenho e simetria sob medida.</p>
+                    <p>Aparar o comprimento, alinhar as bochechas e o pescoço de acordo com o formato do seu rosto.</p>
+                </div>
+                <div class="service-price-duration">
+                    <span class="service-price">R$ 30,00</span>
+                    <span class="service-duration"><i class="fas fa-clock"></i> 30 min</span>
+                </div>
+            </div>
+
+            <div class="service-card featured reveal" data-category="barba" style="transition-delay:0.3s">
+                <span class="service-badge">Premium</span>
+                <div class="service-icon-wrap" style="border-color:rgba(197,160,89,0.5)"><i class="fas fa-spa" style="color:var(--gold-light)"></i></div>
+                <h3>Barboterapia Clássica</h3>
+                <p class="tagline">Spa relaxante para a sua pele.</p>
+                <p>Inclui massageador facial, vapor de ozônio purificante, esfoliação suave e toalha quente com óleos essenciais.</p>
+                <div class="service-price-duration">
+                    <span class="service-price">R$ 80,00</span>
+                    <span class="service-duration"><i class="fas fa-clock"></i> 60 min</span>
+                </div>
+            </div>
+
+            <div class="service-card reveal" data-category="barba" style="transition-delay:0.4s">
+                <div>
+                    <div class="service-icon-wrap"><i class="fas fa-wind"></i></div>
+                    <h3>Condicionamento &amp; Hidratação</h3>
+                    <p class="tagline">Maciez extrema para os fios.</p>
+                    <p>Aplicação de balms e óleos reconstrutores que combatem a coceira e o ressecamento da barba.</p>
+                </div>
+                <div class="service-price-duration">
+                    <span class="service-price">A partir de R$ 30,00</span>
+                    <span class="service-duration"><i class="fas fa-clock"></i> 30 min</span>
+                </div>
+            </div>
+
+            <div class="service-card reveal" data-category="barba" style="transition-delay:0.1s">
+                <div>
+                    <div class="service-icon-wrap"><i class="fas fa-brush"></i></div>
+                    <h3>Pigmentação na Barba</h3>
+                    <p class="tagline">Correção sutil de falhas.</p>
+                    <p>Disfarce de fios brancos e preenchimento de imperfeições com tinta especial de aspecto natural.</p>
+                </div>
+                <div class="service-price-duration">
+                    <span class="service-price">R$ 30,00</span>
+                    <span class="service-duration"><i class="fas fa-clock"></i> 30 min</span>
+                </div>
+            </div>
+
+            <!-- CATEGORIA: COMBOS -->
+            <div class="service-card featured reveal" data-category="combos" style="transition-delay:0.2s">
+                <span class="service-badge">Mais Vendido</span>
+                <div class="service-icon-wrap" style="border-color:rgba(197,160,89,0.5)"><i class="fas fa-crown" style="color:var(--gold-light)"></i></div>
+                <h3>O Combo Dubai</h3>
+                <p class="tagline">Cabelo, Barba &amp; Experiência.</p>
+                <p>O combo supremo. Alinhamento de cabelo e barba premium com direito a cerveja estupidamente gelada de cortesia.</p>
+                <div class="service-price-duration">
+                    <span class="service-price">R$ 100,00</span>
+                    <span class="service-duration"><i class="fas fa-clock"></i> 60 min</span>
+                </div>
+            </div>
+
+            <div class="service-card reveal" data-category="combos" style="transition-delay:0.3s">
+                <div>
+                    <div class="service-icon-wrap"><i class="fas fa-layer-group"></i></div>
+                    <h3>Combo Completo</h3>
+                    <p class="tagline">Cabelo + Barba + Sobrancelha.</p>
+                    <p>Renovação completa do visual. Alinhamento capilar, barba com toalha quente e design profissional de sobrancelha.</p>
+                </div>
+                <div class="service-price-duration">
+                    <span class="service-price">R$ 115,00</span>
+                    <span class="service-duration"><i class="fas fa-clock"></i> 75 min</span>
+                </div>
+            </div>
+
+            <div class="service-card reveal" data-category="combos" style="transition-delay:0.4s">
+                <div>
+                    <div class="service-icon-wrap"><i class="fas fa-user-check"></i></div>
+                    <h3>Corte + Sobrancelha</h3>
+                    <p class="tagline">Limpeza do contorno facial.</p>
+                    <p>Corte clássico ou degradê combinado com o alinhamento da sobrancelha na navalha ou pinça.</p>
+                </div>
+                <div class="service-price-duration">
+                    <span class="service-price">R$ 65,00</span>
+                    <span class="service-duration"><i class="fas fa-clock"></i> 40 min</span>
+                </div>
+            </div>
+
+            <div class="service-card reveal" data-category="combos" style="transition-delay:0.1s">
+                <div>
+                    <div class="service-icon-wrap"><i class="fas fa-user-tie"></i></div>
+                    <h3>Consultoria de Visagismo</h3>
+                    <p class="tagline">Abordagem Visagista Completa.</p>
+                    <p>Análise de formato de rosto, linhas e temperamentos para sugerir o corte e barba ideais para sua imagem pessoal.</p>
+                </div>
+                <div class="service-price-duration">
+                    <span class="service-price">Sob Consulta</span>
+                    <span class="service-duration"><i class="fas fa-clock"></i> 45 min</span>
+                </div>
+            </div>
+
+            <div class="service-card reveal" data-category="combos" style="transition-delay:0.2s">
+                <div>
+                    <div class="service-icon-wrap"><i class="fas fa-gem"></i></div>
+                    <h3>Dia do Noivo</h3>
+                    <p class="tagline">O seu momento especial.</p>
+                    <p>Pacotes premium reservados com exclusividade. Cabelo, barba, spa facial e relaxamento completo para o grande dia.</p>
+                </div>
+                <div class="service-price-duration">
+                    <span class="service-price">Sob Consulta</span>
+                    <span class="service-duration"><i class="fas fa-clock"></i> Especial</span>
+                </div>
+            </div>
+
+            <!-- CATEGORIA: CUIDADOS & ESTÉTICA -->
+            <div class="service-card reveal" data-category="cuidados" style="transition-delay:0.3s">
+                <div>
+                    <div class="service-icon-wrap"><i class="fas fa-eye"></i></div>
+                    <h3>Design de Sobrancelha</h3>
+                    <p class="tagline">Limpeza e harmonia do olhar.</p>
+                    <p>Design de sobrancelhas masculinas na navalha ou pinça, removendo excessos e definindo o contorno.</p>
+                </div>
+                <div class="service-price-duration">
+                    <span class="service-price">R$ 20,00</span>
+                    <span class="service-duration"><i class="fas fa-clock"></i> 15 min</span>
+                </div>
+            </div>
+
+            <div class="service-card reveal" data-category="cuidados" style="transition-delay:0.4s">
+                <div>
+                    <div class="service-icon-wrap"><i class="fas fa-tint"></i></div>
+                    <h3>Depilação Nariz / Orelha</h3>
+                    <p class="tagline">Higiene rápida com cera quente.</p>
+                    <p>Remoção indolor e duradoura de pelos indesejados nas orelhas e nariz usando cera quente higiênica.</p>
+                </div>
+                <div class="service-price-duration">
+                    <span class="service-price">R$ 35,00</span>
+                    <span class="service-duration"><i class="fas fa-clock"></i> 20 min</span>
+                </div>
+            </div>
+
+            <div class="service-card reveal" data-category="cuidados" style="transition-delay:0.1s">
+                <div>
+                    <div class="service-icon-wrap"><i class="fas fa-leaf"></i></div>
+                    <h3>Limpeza de Pele Tradicional</h3>
+                    <p class="tagline">Máscara negra desintoxicante.</p>
+                    <p>Aplicação de máscara negra de carvão ativado, esfoliação facial e hidratação para remoção de impurezas superficiais.</p>
+                </div>
+                <div class="service-price-duration">
+                    <span class="service-price">R$ 75,00</span>
+                    <span class="service-duration"><i class="fas fa-clock"></i> 60 min</span>
+                </div>
+            </div>
+
+            <div class="service-card reveal" data-category="cuidados" style="transition-delay:0.2s">
+                <div>
+                    <div class="service-icon-wrap"><i class="fas fa-water"></i></div>
+                    <h3>Limpeza de Pele Profunda</h3>
+                    <p class="tagline">Vapor de ozônio e argila branca.</p>
+                    <p>Procedimento completo com sucção de cravos por equipamento específico, vapor de ozônio e máscara de argila branca.</p>
+                </div>
+                <div class="service-price-duration">
+                    <span class="service-price">R$ 75,00</span>
+                    <span class="service-duration"><i class="fas fa-clock"></i> 60 min</span>
+                </div>
+            </div>
+
+            <div class="service-card reveal" data-category="cuidados" style="transition-delay:0.3s">
+                <div>
+                    <div class="service-icon-wrap"><i class="fas fa-smile"></i></div>
+                    <h3>Extração de Cravos &amp; Esfoliação</h3>
+                    <p class="tagline">Renovação celular da pele.</p>
+                    <p>Esfoliação profunda com produtos profissionais e remoção pontual de cravos para um rosto limpo.</p>
+                </div>
+                <div class="service-price-duration">
+                    <span class="service-price">R$ 50,00</span>
+                    <span class="service-duration"><i class="fas fa-clock"></i> 30 min</span>
+                </div>
+            </div>
+
+            <div class="service-card reveal" data-category="cuidados" style="transition-delay:0.4s">
+                <div>
+                    <div class="service-icon-wrap"><i class="fas fa-hot-tub"></i></div>
+                    <h3>Hidratação Capilar</h3>
+                    <p class="tagline">Máscara de tratamento profundo.</p>
+                    <p>Indicado para fios secos e opacos. Devolve os nutrientes, a maciez e o brilho natural ao cabelo.</p>
+                </div>
+                <div class="service-price-duration">
+                    <span class="service-price">R$ 30,00</span>
+                    <span class="service-duration"><i class="fas fa-clock"></i> 30 min</span>
+                </div>
+            </div>
+
+            <div class="service-card reveal" data-category="cuidados" style="transition-delay:0.1s">
+                <div>
+                    <div class="service-icon-wrap"><i class="fas fa-sparkles"></i></div>
+                    <h3>Progressiva / Desondulação</h3>
+                    <p class="tagline">Alisamento natural e brilho.</p>
+                    <p>Tratamento termoativo para alinhamento dos fios, controle de volume e frizz capilar.</p>
+                </div>
+                <div class="service-price-duration">
+                    <span class="service-price">R$ 85,00</span>
+                    <span class="service-duration"><i class="fas fa-clock"></i> 60 min</span>
+                </div>
             </div>
 
         </div>
@@ -923,15 +1756,47 @@
             <div class="section-label" style="justify-content:center">Avaliações Reais</div>
             <h2 style="font-size:clamp(2rem,5vw,3.5rem); color:#fff; margin-bottom:1rem">O Que Nossos Clientes Dizem</h2>
             <p style="color:rgba(240,236,228,0.5)">
-                49 avaliações no Google. Nota 5.0. Satisfação garantida ou não cobramos.
+                Nota máxima 5.0 baseada em 49 avaliações no Google. Compromisso total com o seu estilo.
             </p>
         </div>
 
         <div class="depoimentos-grid">
 
-            <div class="depoimento-card reveal" style="transition-delay:0.1s">
+            <!-- Google Summary Widget -->
+            <div class="google-widget-card reveal" style="transition-delay:0.1s">
+                <div>
+                    <div class="google-widget-header">
+                        <div class="google-widget-icon">
+                            <i class="fab fa-google"></i>
+                        </div>
+                        <span class="google-widget-title">Google Maps</span>
+                    </div>
+                    <div class="google-rating-wrapper">
+                        <span class="google-rating-number">5.0</span>
+                        <div class="google-rating-stars">★★★★★</div>
+                        <span class="google-rating-count">49 avaliações</span>
+                    </div>
+                </div>
+                <div class="google-widget-status">
+                    <div class="google-status-row">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Status: <span class="google-status-badge">Aberto</span></span>
+                    </div>
+                    <div class="google-status-row">
+                        <i class="fas fa-clock"></i>
+                        <span>Fecha às 20:00 horas</span>
+                    </div>
+                    <div class="google-status-row">
+                        <i class="fas fa-sync-alt"></i>
+                        <span>Atualizado há 7 semanas</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Depoimento 1 -->
+            <div class="depoimento-card reveal" style="transition-delay:0.2s">
                 <div class="depoimento-quote">"</div>
-                <p class="depoimento-text">Simplesmente o melhor atendimento que já tive em uma barbearia. Ambiente top, barbeiro atencioso, e saí com o cabelo e barba impecáveis. Já sou cliente fiel!</p>
+                <p class="depoimento-text">Corte bacana e espaço top demais!</p>
                 <div class="depoimento-stars">★★★★★</div>
                 <div class="depoimento-author">
                     <div class="depoimento-avatar">RC</div>
@@ -942,9 +1807,10 @@
                 </div>
             </div>
 
-            <div class="depoimento-card reveal" style="transition-delay:0.2s">
+            <!-- Depoimento 2 -->
+            <div class="depoimento-card reveal" style="transition-delay:0.3s">
                 <div class="depoimento-quote">"</div>
-                <p class="depoimento-text">Fui pela primeira vez e fiquei impressionado com o nível de qualidade. A toalha quente na barba é uma experiência à parte. Lugar de alto padrão em Itu, sem dúvida.</p>
+                <p class="depoimento-text">Barbearia muito boa, pessoal atencioso e ambiente aconchegante</p>
                 <div class="depoimento-stars">★★★★★</div>
                 <div class="depoimento-author">
                     <div class="depoimento-avatar">LM</div>
@@ -955,9 +1821,10 @@
                 </div>
             </div>
 
-            <div class="depoimento-card reveal" style="transition-delay:0.3s">
+            <!-- Depoimento 3 -->
+            <div class="depoimento-card reveal" style="transition-delay:0.4s">
                 <div class="depoimento-quote">"</div>
-                <p class="depoimento-text">O Combo Dubai é incrível! Saí renovado, com cabelo e barba perfeitos. A cerveja gelada no final é o detalhe que faz toda a diferença. Recomendo demais!</p>
+                <p class="depoimento-text">Excelentes profissionais, atentos ao detalhe e satisfação do cliente.</p>
                 <div class="depoimento-stars">★★★★★</div>
                 <div class="depoimento-author">
                     <div class="depoimento-avatar">GP</div>
@@ -1004,32 +1871,211 @@
 <!-- ==============================
      AGENDAR
 ============================== -->
+<!-- ==============================
+     AGENDAR (PAINEL INTERATIVO)
+============================= -->
 <section id="agendar">
-    <div class="container" style="display:flex;justify-content:center">
-        <div class="agendar-card reveal">
-            <div class="section-label" style="justify-content:center; margin-bottom:1.5rem">Agendamento Fácil</div>
-            <h2>Pronto para uma<br>Renovação Completa?</h2>
-            <p>Fale diretamente com a nossa equipe pelo WhatsApp e garanta o seu horário. Rápido, simples e sem complicação.</p>
+    <div class="booking-glow"></div>
+    <div class="booking-inner">
+        
+        <!-- Header -->
+        <div class="reveal" style="text-align:center; margin-bottom: 3.5rem">
+            <div class="section-label" style="justify-content:center; margin-bottom:1rem">Agendamento Fácil</div>
+            <h2 style="font-size:clamp(2rem,5vw,3.5rem); color:#fff; margin-bottom:1rem">Agende seu <span class="gold-gradient">Horário</span></h2>
+            <p style="color:rgba(240,236,228,0.5)">Reserve o seu momento de autocuidado online em poucos cliques.</p>
+        </div>
 
-            <div class="agendar-info">
-                <div class="agendar-info-item">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <span>Av. Prudente de Moraes, Vila Nova — Itu/SP</span>
-                </div>
-                <div class="agendar-info-item">
-                    <i class="fas fa-clock"></i>
-                    <span>Aberto até as 20:00 horas</span>
-                </div>
-                <div class="agendar-info-item">
-                    <i class="fas fa-phone"></i>
-                    <span>(11) 91082-6468</span>
-                </div>
+        <!-- Indicators -->
+        <div class="step-indicators reveal">
+            <div class="step-indicator active" id="indicator-step-1">
+                <div class="step-circle">1</div>
+                <span class="step-label">Serviço</span>
             </div>
+            <div class="step-line"></div>
+            <div class="step-indicator" id="indicator-step-2">
+                <div class="step-circle">2</div>
+                <span class="step-label">Profissional</span>
+            </div>
+            <div class="step-line"></div>
+            <div class="step-indicator" id="indicator-step-3">
+                <div class="step-circle">3</div>
+                <span class="step-label">Horário</span>
+            </div>
+            <div class="step-line"></div>
+            <div class="step-indicator" id="indicator-step-4">
+                <div class="step-circle">4</div>
+                <span class="step-label">Confirmação</span>
+            </div>
+        </div>
 
-            <a href="https://wa.me/5511910826468?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20um%20hor%C3%A1rio%20na%20Dubai%20Barbearia%20Itu." target="_blank" class="btn btn-primary" style="font-size:0.8rem; padding:1rem 2.5rem">
-                <i class="fab fa-whatsapp" style="font-size:1rem"></i>
-                Agendar pelo WhatsApp Agora
-            </a>
+        <!-- Wizard Panel -->
+        <div class="booking-panel reveal">
+            <div class="booking-panel-body">
+                
+                <!-- STEP 1: SERVICE -->
+                <div class="booking-step-content active" id="booking-step-1">
+                    <h3 class="booking-step-title">Escolha o Serviço</h3>
+                    <p class="booking-step-sub">Selecione um dos nossos rituais de excelência.</p>
+                    
+                    <div class="booking-list" id="services-booking-list">
+                        <!-- Services generated dynamically by JS -->
+                    </div>
+                    
+                    <div class="booking-nav">
+                        <div></div>
+                        <button class="booking-next-btn" id="next-to-step-2" disabled>
+                            Continuar <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- STEP 2: PROFESSIONAL -->
+                <div class="booking-step-content" id="booking-step-2">
+                    <h3 class="booking-step-title">Escolha o Profissional</h3>
+                    <p class="booking-step-sub">Quem irá conduzir a sua transformação?</p>
+                    
+                    <div class="professionals-grid" id="professionals-booking-grid">
+                        <div class="professional-card" data-prof-id="1">
+                            <div class="professional-card-icon"><i class="fas fa-user"></i></div>
+                            <div class="professional-name">Julio</div>
+                            <div class="professional-role">Master Barber</div>
+                        </div>
+                        <div class="professional-card" data-prof-id="2">
+                            <div class="professional-card-icon"><i class="fas fa-user"></i></div>
+                            <div class="professional-name">Matheus</div>
+                            <div class="professional-role">Especialista em Barba</div>
+                        </div>
+                        <div class="professional-card" data-prof-id="3">
+                            <div class="professional-card-icon"><i class="fas fa-user"></i></div>
+                            <div class="professional-name">Thiago</div>
+                            <div class="professional-role">Hair Stylist</div>
+                        </div>
+                        <div class="professional-card" data-prof-id="4">
+                            <div class="professional-card-icon"><i class="fas fa-user"></i></div>
+                            <div class="professional-name">Luan</div>
+                            <div class="professional-role">Skin Care Expert</div>
+                        </div>
+                        <div class="professional-card" data-prof-id="any">
+                            <div class="professional-card-icon"><i class="fas fa-users"></i></div>
+                            <div class="professional-name">Qualquer um</div>
+                            <div class="professional-role">Profissional Disponível</div>
+                        </div>
+                    </div>
+                    
+                    <div class="booking-nav">
+                        <button class="booking-back-btn" id="back-to-step-1">
+                            <i class="fas fa-arrow-left"></i> Voltar
+                        </button>
+                        <button class="booking-next-btn" id="next-to-step-3" disabled>
+                            Continuar <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- STEP 3: DATE & TIME -->
+                <div class="booking-step-content" id="booking-step-3">
+                    <h3 class="booking-step-title">Data e Horário</h3>
+                    <p class="booking-step-sub">Selecione o melhor dia e horário para seu ritual.</p>
+                    
+                    <p class="summary-item-label" style="margin-bottom: 0.5rem;">Selecione a data</p>
+                    <div class="dates-scroll" id="dates-booking-scroll">
+                        <!-- Dates generated dynamically by JS -->
+                    </div>
+
+                    <div id="time-slots-container" style="display: none;">
+                        <p class="summary-item-label" style="margin-bottom: 0.5rem;">Horários disponíveis</p>
+                        <div class="time-slots-grid" id="time-slots-booking-grid">
+                            <!-- Slots generated dynamically by JS -->
+                        </div>
+                    </div>
+
+                    <div class="booking-nav">
+                        <button class="booking-back-btn" id="back-to-step-2">
+                            <i class="fas fa-arrow-left"></i> Voltar
+                        </button>
+                        <button class="booking-next-btn" id="next-to-step-4" disabled>
+                            Continuar <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- STEP 4: CONFIRMATION -->
+                <div class="booking-step-content" id="booking-step-4">
+                    <h3 class="booking-step-title">Confirme os Dados</h3>
+                    <p class="booking-step-sub">Informe seus dados para finalizarmos seu agendamento.</p>
+                    
+                    <div class="booking-summary-box">
+                        <div class="summary-title">
+                            <i class="fas fa-calendar-check"></i> Resumo do Agendamento
+                        </div>
+                        <div class="summary-grid">
+                            <div>
+                                <span class="summary-item-label">Serviço</span>
+                                <div class="summary-item-val highlight" id="summary-service-name">-</div>
+                            </div>
+                            <div>
+                                <span class="summary-item-label">Profissional</span>
+                                <div class="summary-item-val" id="summary-prof-name">-</div>
+                            </div>
+                            <div>
+                                <span class="summary-item-label">Data</span>
+                                <div class="summary-item-val" id="summary-date-val">-</div>
+                            </div>
+                            <div>
+                                <span class="summary-item-label">Horário</span>
+                                <div class="summary-item-val highlight" id="summary-time-val">-</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="booking-form">
+                        <div class="form-group">
+                            <label class="form-label" for="client-name">Nome Completo</label>
+                            <input class="form-input" type="text" id="client-name" placeholder="Ex: João da Silva">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="client-phone">WhatsApp / Celular</label>
+                            <input class="form-input" type="text" id="client-phone" placeholder="Ex: (11) 99999-9999">
+                        </div>
+                    </div>
+
+                    <div class="booking-nav">
+                        <button class="booking-back-btn" id="back-to-step-3">
+                            <i class="fas fa-arrow-left"></i> Voltar
+                        </button>
+                        <button class="booking-next-btn" id="confirm-booking-btn" disabled>
+                            Confirmar Agendamento <i class="fas fa-check"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- STEP 5: SUCCESS -->
+                <div class="booking-step-content" id="booking-step-5">
+                    <div class="booking-success-box">
+                        <div class="success-icon-wrap">
+                            <div class="success-icon-border">
+                                <div class="success-icon-bg">
+                                    <i class="fas fa-check"></i>
+                                </div>
+                            </div>
+                            <div class="success-corner-tl"></div>
+                            <div class="success-corner-tr"></div>
+                            <div class="success-corner-bl"></div>
+                            <div class="success-corner-br"></div>
+                        </div>
+                        
+                        <h3 class="success-title">Agendamento Confirmado!</h3>
+                        <span class="success-sub">Dubai Barbearia Itu</span>
+                        
+                        <p class="success-desc">
+                            Te esperamos no dia <strong id="success-date-val">-</strong> às <span class="highlight" id="success-time-val">-</span> com <strong id="success-prof-name">-</strong> para o serviço: <br><strong id="success-service-name">-</strong>.
+                        </p>
+                        
+                        <button class="success-btn" id="reset-booking-btn">Fazer outro agendamento</button>
+                    </div>
+                </div>
+
+            </div>
         </div>
     </div>
 </section>
@@ -1127,7 +2173,7 @@
             </div>
 
             <div class="footer-bottom">
-                <p>© 2024 Dubai Barbearia Itu. Todos os direitos reservados.</p>
+                <p>© 2024 Dubai Barbearia Itu. Todos os direitos reservados. | <a href="admin.html" style="color: var(--gold); text-decoration: none; margin-left: 0.5rem;" target="_blank">Acesso Admin</a></p>
                 <p>Nota 5.0 ★★★★★ no Google · Itu, SP</p>
             </div>
         </div>
@@ -1200,6 +2246,446 @@
         });
     }, { threshold: 0.4 });
     sections.forEach(s => sectionObserver.observe(s));
+
+    // ── Services tab filtering
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const serviceCards = document.querySelectorAll('.service-card');
+    
+    tabBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            // Remove active class from all buttons and add to the clicked one
+            tabBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            
+            const category = btn.getAttribute('data-category');
+            
+            serviceCards.forEach(card => {
+                const cardCategory = card.getAttribute('data-category');
+                
+                if (category === 'todos' || cardCategory === category) {
+                    card.classList.remove('hidden');
+                    // Reset animation styles
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(1rem)';
+                    // Retrigger animation
+                    setTimeout(() => {
+                        card.style.transition = 'opacity 0.4s var(--ease-smooth), transform 0.4s var(--ease-smooth)';
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }, 50);
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+        });
+    });
+
+    // ── INTERACTIVE BOOKING PANEL ENGINE ──
+    const defaultPrices = {
+        '1': 50, '2': 50, '3': 50, '4': 50, '5': 60, '6': 50, '7': 30, '8': 60,
+        '9': 45, '10': 30, '11': 80, '12': 30, '13': 30, '14': 100, '15': 115,
+        '16': 65, '17': 0, '18': 0, '19': 20, '20': 35, '21': 75, '22': 75,
+        '23': 50, '24': 30, '25': 85
+    };
+
+    function getCustomPrices() {
+        const stored = localStorage.getItem('dubai_prices');
+        if (stored) {
+            try {
+                return JSON.parse(stored);
+            } catch(e) {
+                console.error("Error parsing stored prices:", e);
+            }
+        }
+        return defaultPrices;
+    }
+
+    const currentPrices = getCustomPrices();
+
+    function formatServicePrice(id, price) {
+        if (price === 0) return "Sob Consulta";
+        if (id === '8' || id === '12') return `A partir de R$ ${price.toFixed(2).replace('.', ',')}`;
+        if (id === '18') return "Sob Consulta";
+        return `R$ ${price.toFixed(2).replace('.', ',')}`;
+    }
+
+    const baseServices = [
+        { id: "1", name: "Corte Clássico & Moderno", duration: "30 min" },
+        { id: "2", name: "Corte em Degradê (Fade)", duration: "30 min" },
+        { id: "3", name: "Especialista em Penteados Afro", duration: "30 min" },
+        { id: "4", name: "Cabelos Cacheados", duration: "30 min" },
+        { id: "5", name: "Corte de Cabelo Longo", duration: "45 min" },
+        { id: "6", name: "Corte Kids (Crianças)", duration: "30 min" },
+        { id: "7", name: "Raspar o Cabelo / Cabeça", duration: "30 min" },
+        { id: "8", name: "Coloração de Cabelo", duration: "45 min" },
+        { id: "9", name: "Barba com Toalha Quente", duration: "30 min" },
+        { id: "10", name: "Aparar & Manutenção de Barba", duration: "30 min" },
+        { id: "11", name: "Barboterapia Clássica", duration: "60 min" },
+        { id: "12", name: "Condicionamento & Hidratação", duration: "30 min" },
+        { id: "13", name: "Pigmentação na Barba", duration: "30 min" },
+        { id: "14", name: "O Combo Dubai", duration: "60 min" },
+        { id: "15", name: "Combo Completo", duration: "75 min" },
+        { id: "16", name: "Corte + Sobrancelha", duration: "40 min" },
+        { id: "17", name: "Consultoria de Visagismo", duration: "45 min" },
+        { id: "18", name: "Dia do Noivo", duration: "Especial" },
+        { id: "19", name: "Design de Sobrancelha", duration: "15 min" },
+        { id: "20", name: "Depilação Nariz / Orelha", duration: "20 min" },
+        { id: "21", name: "Limpeza de Pele Tradicional", duration: "60 min" },
+        { id: "22", name: "Limpeza de Pele Profunda", duration: "60 min" },
+        { id: "23", name: "Extração de Cravos & Esfoliação", duration: "30 min" },
+        { id: "24", name: "Hidratação Capilar", duration: "30 min" },
+        { id: "25", name: "Progressiva / Desondulação", duration: "60 min" }
+    ];
+
+    const servicesList = baseServices.map(s => {
+        const priceNum = currentPrices[s.id] !== undefined ? currentPrices[s.id] : defaultPrices[s.id];
+        return {
+            id: s.id,
+            name: s.name,
+            duration: s.duration,
+            price: formatServicePrice(s.id, priceNum)
+        };
+    });
+
+    // ── Load custom barbers from localStorage
+    function getBarbers() {
+        const stored = localStorage.getItem('dubai_barbers');
+        if (stored) {
+            try {
+                const parsed = JSON.parse(stored);
+                const data = {};
+                parsed.forEach(b => {
+                    if (b.active !== false) {
+                        data[b.id] = { name: b.name, role: b.role };
+                    }
+                });
+                data['any'] = { name: 'Qualquer um', role: 'Profissional Disponível' };
+                return data;
+            } catch(e) {
+                console.error("Error loading barbers:", e);
+            }
+        }
+        return {
+            '1': { name: 'Julio', role: 'Master Barber' },
+            '2': { name: 'Matheus', role: 'Especialista em Barba' },
+            '3': { name: 'Thiago', role: 'Hair Stylist' },
+            '4': { name: 'Luan', role: 'Skin Care Expert' },
+            'any': { name: 'Qualquer um', role: 'Profissional Disponível' }
+        };
+    }
+    const professionalsData = getBarbers();
+
+    function updateLandingPagePrices() {
+        document.querySelectorAll('.service-card').forEach(card => {
+            const titleEl = card.querySelector('h3');
+            if (!titleEl) return;
+            const name = titleEl.innerHTML.replace(/&amp;/g, '&').trim();
+            const service = servicesList.find(s => s.name === name);
+            if (service) {
+                const priceEl = card.querySelector('.service-price');
+                if (priceEl) {
+                    priceEl.innerText = service.price;
+                }
+            }
+        });
+    }
+    updateLandingPagePrices();
+
+    // State
+    let currentStep = 1;
+    let selectedService = '';
+    let selectedProfessional = '';
+    let selectedDate = '';
+    let selectedTime = '';
+
+    // Render step inputs & content
+    const servicesListEl = document.getElementById('services-booking-list');
+    const professionalsGridEl = document.getElementById('professionals-booking-grid');
+    const datesScrollEl = document.getElementById('dates-booking-scroll');
+    const timeSlotsGridEl = document.getElementById('time-slots-booking-grid');
+    const timeSlotsContainer = document.getElementById('time-slots-container');
+
+    // Render services in step 1
+    if (servicesListEl) {
+        servicesListEl.innerHTML = servicesList.map(s => `
+            <button class="booking-item-btn" data-service-id="${s.id}">
+                <div class="booking-item-name">
+                    <span class="booking-item-dot"></span>
+                    <span>${s.name}</span>
+                </div>
+                <span class="booking-item-price">${s.price}</span>
+            </button>
+        `).join('');
+
+        servicesListEl.querySelectorAll('.booking-item-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                servicesListEl.querySelectorAll('.booking-item-btn').forEach(b => b.classList.remove('selected'));
+                btn.classList.add('selected');
+                selectedService = btn.getAttribute('data-service-id');
+                document.getElementById('next-to-step-2').removeAttribute('disabled');
+            });
+        });
+    }
+
+    // Professional Selection (Render dynamically)
+    function renderProfessionals() {
+        if (!professionalsGridEl) return;
+        professionalsGridEl.innerHTML = Object.keys(professionalsData).map(id => {
+            const isAny = id === 'any';
+            const iconClass = isAny ? 'fa-users' : 'fa-user';
+            return `
+                <div class="professional-card" data-prof-id="${id}">
+                    <div class="professional-card-icon"><i class="fas ${iconClass}"></i></div>
+                    <div class="professional-name">${professionalsData[id].name}</div>
+                    <div class="professional-role">${professionalsData[id].role}</div>
+                </div>
+            `;
+        }).join('');
+
+        professionalsGridEl.querySelectorAll('.professional-card').forEach(card => {
+            card.addEventListener('click', () => {
+                professionalsGridEl.querySelectorAll('.professional-card').forEach(c => c.classList.remove('selected'));
+                card.classList.add('selected');
+                selectedProfessional = card.getAttribute('data-prof-id');
+                document.getElementById('next-to-step-3').removeAttribute('disabled');
+            });
+        });
+    }
+    renderProfessionals();
+
+    // Helper functions for slots
+    function getNextDays() {
+        const days = [];
+        for (let i = 0; i < 7; i++) {
+            const d = new Date();
+            d.setDate(d.getDate() + i);
+            days.push(d.toISOString().split('T')[0]);
+        }
+        return days;
+    }
+
+    function getAvailableTimeSlots(dateString) {
+        const d = new Date(dateString + 'T00:00:00');
+        const dayOfWeek = d.getDay();
+        
+        if (dayOfWeek === 0) return []; // Closed on Sunday
+        
+        let startHour = 9;
+        let endHour = 20;
+        
+        if (dayOfWeek === 6) { // Saturday
+            startHour = 8;
+            endHour = 18;
+        }
+        
+        const slots = [];
+        for (let h = startHour; h < endHour; h++) {
+            slots.push(`${h.toString().padStart(2, '0')}:00`);
+            slots.push(`${h.toString().padStart(2, '0')}:30`);
+        }
+        return slots;
+    }
+
+    function isSlotAvailable(date, time, profId) {
+        const bookings = JSON.parse(localStorage.getItem('dubai_bookings') || '[]');
+        if (profId === 'any') {
+            const professionals = ['1', '2', '3', '4'];
+            return professionals.some(pId => {
+                return !bookings.some(b => b.date === date && b.time === time && b.professionalId === pId);
+            });
+        }
+        return !bookings.some(b => b.date === date && b.time === time && b.professionalId === profId);
+    }
+
+    // Render dates in step 3
+    function renderDates() {
+        if (!datesScrollEl) return;
+        const days = getNextDays();
+        datesScrollEl.innerHTML = days.map(date => {
+            const d = new Date(date + 'T00:00:00');
+            const dayName = d.toLocaleDateString('pt-BR', { weekday: 'short' });
+            const dayNum = d.getDate();
+            const month = d.toLocaleDateString('pt-BR', { month: 'short' });
+            
+            // If Sunday, disable or style closed
+            const isSunday = d.getDay() === 0;
+            return `
+                <button class="date-btn" data-date="${date}" ${isSunday ? 'disabled style="opacity:0.25; cursor:not-allowed;"' : ''}>
+                    <span class="date-btn-week">${dayName}</span>
+                    <span class="date-btn-num">${dayNum}</span>
+                    <span class="date-btn-month">${month}</span>
+                </button>
+            `;
+        }).join('');
+
+        datesScrollEl.querySelectorAll('.date-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                datesScrollEl.querySelectorAll('.date-btn').forEach(b => b.classList.remove('selected'));
+                btn.classList.add('selected');
+                selectedDate = btn.getAttribute('data-date');
+                selectedTime = '';
+                document.getElementById('next-to-step-4').setAttribute('disabled', 'true');
+                renderTimeSlots();
+            });
+        });
+    }
+
+    // Render time slots
+    function renderTimeSlots() {
+        if (!timeSlotsGridEl || !selectedDate) return;
+        
+        const slots = getAvailableTimeSlots(selectedDate);
+        timeSlotsContainer.style.display = 'block';
+        
+        timeSlotsGridEl.innerHTML = slots.map(time => {
+            const available = isSlotAvailable(selectedDate, time, selectedProfessional);
+            return `
+                <button class="time-slot-btn" data-time="${time}" ${!available ? 'disabled' : ''}>
+                    ${time}
+                </button>
+            `;
+        }).join('');
+
+        timeSlotsGridEl.querySelectorAll('.time-slot-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                timeSlotsGridEl.querySelectorAll('.time-slot-btn').forEach(b => b.classList.remove('selected'));
+                btn.classList.add('selected');
+                selectedTime = btn.getAttribute('data-time');
+                document.getElementById('next-to-step-4').removeAttribute('disabled');
+            });
+        });
+    }
+
+    // Step navigation
+    function setStep(step) {
+        currentStep = step;
+        
+        // Update active class on content panels
+        document.querySelectorAll('.booking-step-content').forEach((panel, index) => {
+            if (index + 1 === step) {
+                panel.classList.add('active');
+            } else {
+                panel.classList.remove('active');
+            }
+        });
+
+        // Update indicators
+        document.querySelectorAll('.step-indicator').forEach((ind, index) => {
+            const num = index + 1;
+            if (num === step) {
+                ind.classList.add('active');
+                ind.classList.remove('completed');
+            } else if (num < step) {
+                ind.classList.remove('active');
+                ind.classList.add('completed');
+            } else {
+                ind.classList.remove('active');
+                ind.classList.remove('completed');
+            }
+        });
+
+        // If step 3, render dates
+        if (step === 3) {
+            renderDates();
+            timeSlotsContainer.style.display = 'none';
+        }
+
+        // If step 4, load summary values
+        if (step === 4) {
+            const serviceObj = servicesList.find(s => s.id === selectedService);
+            const profObj = professionalsData[selectedProfessional];
+            
+            document.getElementById('summary-service-name').innerText = serviceObj ? serviceObj.name : '-';
+            document.getElementById('summary-prof-name').innerText = profObj ? profObj.name : '-';
+            document.getElementById('summary-date-val').innerText = selectedDate.split('-').reverse().join('/');
+            document.getElementById('summary-time-val').innerText = selectedTime;
+            
+            // Trigger check form validity
+            checkFormValidity();
+        }
+
+        // If step 5 (success), save booking to localStorage
+        if (step === 5) {
+            const clientNameVal = document.getElementById('client-name').value;
+            const clientPhoneVal = document.getElementById('client-phone').value;
+            
+            const serviceObj = servicesList.find(s => s.id === selectedService);
+            const profObj = professionalsData[selectedProfessional];
+            
+            // Save booking
+            const bookings = JSON.parse(localStorage.getItem('dubai_bookings') || '[]');
+            const newBooking = {
+                id: Math.random().toString(36).substring(2, 11),
+                serviceId: selectedService,
+                professionalId: selectedProfessional,
+                date: selectedDate,
+                time: selectedTime,
+                name: clientNameVal,
+                phone: clientPhoneVal
+            };
+            bookings.push(newBooking);
+            localStorage.setItem('dubai_bookings', JSON.stringify(bookings));
+
+            // Populate success card
+            document.getElementById('success-service-name').innerText = serviceObj ? serviceObj.name : '-';
+            document.getElementById('success-prof-name').innerText = profObj ? profObj.name : '-';
+            document.getElementById('success-date-val').innerText = selectedDate.split('-').reverse().join('/');
+            document.getElementById('success-time-val').innerText = selectedTime;
+        }
+    }
+
+    // Step button bindings
+    document.getElementById('next-to-step-2').addEventListener('click', () => setStep(2));
+    document.getElementById('back-to-step-1').addEventListener('click', () => setStep(1));
+    
+    document.getElementById('next-to-step-3').addEventListener('click', () => setStep(3));
+    document.getElementById('back-to-step-2').addEventListener('click', () => setStep(2));
+    
+    document.getElementById('next-to-step-4').addEventListener('click', () => setStep(4));
+    document.getElementById('back-to-step-3').addEventListener('click', () => setStep(3));
+
+    // Form inputs change check
+    const clientNameInput = document.getElementById('client-name');
+    const clientPhoneInput = document.getElementById('client-phone');
+    const confirmBtn = document.getElementById('confirm-booking-btn');
+
+    function checkFormValidity() {
+        if (clientNameInput.value.trim() !== '' && clientPhoneInput.value.trim() !== '') {
+            confirmBtn.removeAttribute('disabled');
+        } else {
+            confirmBtn.setAttribute('disabled', 'true');
+        }
+    }
+
+    clientNameInput.addEventListener('input', checkFormValidity);
+    clientPhoneInput.addEventListener('input', checkFormValidity);
+
+    confirmBtn.addEventListener('click', () => setStep(5));
+
+    // Reset button
+    document.getElementById('reset-booking-btn').addEventListener('click', () => {
+        selectedService = '';
+        selectedProfessional = '';
+        selectedDate = '';
+        selectedTime = '';
+        clientNameInput.value = '';
+        clientPhoneInput.value = '';
+        
+        // Reset selections classes
+        if (servicesListEl) {
+            servicesListEl.querySelectorAll('.booking-item-btn').forEach(b => b.classList.remove('selected'));
+        }
+        if (professionalsGridEl) {
+            professionalsGridEl.querySelectorAll('.professional-card').forEach(c => c.classList.remove('selected'));
+        }
+        
+        document.getElementById('next-to-step-2').setAttribute('disabled', 'true');
+        document.getElementById('next-to-step-3').setAttribute('disabled', 'true');
+        document.getElementById('next-to-step-4').setAttribute('disabled', 'true');
+        confirmBtn.setAttribute('disabled', 'true');
+        
+        setStep(1);
+    });
 </script>
 
 </body>

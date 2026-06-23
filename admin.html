@@ -1,0 +1,1189 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Administrativo | Dubai Barbearia Itu</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --black:     #0a0a0a;
+            --dark:      #111111;
+            --graphite:  #1a1a1a;
+            --surface:   #222222;
+            --gold:      #c5a059;
+            --gold-light:#e8c988;
+            --bronze:    #b08d57;
+            --cream:     #f0ece4;
+            --muted:     #6b6b6b;
+            --border:    rgba(197,160,89,0.15);
+            --font-serif: 'Cinzel', Georgia, serif;
+            --font-sans:  'Inter', system-ui, sans-serif;
+            --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--black);
+            color: var(--cream);
+            font-family: var(--font-sans);
+            font-weight: 300;
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+            padding-bottom: 4rem;
+        }
+
+        /* ── TYPOGRAPHY ── */
+        h1, h2, h3, h4 { font-family: var(--font-serif); font-weight: 700; color: #fff; }
+
+        /* ── CONTAINER ── */
+        .container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+
+        /* ── HEADER ── */
+        .header {
+            display: flex; justify-content: space-between; align-items: center;
+            border-b: 1px solid var(--border); padding-bottom: 1.5rem; margin-bottom: 3rem;
+            border-bottom: 1px solid var(--border);
+        }
+        .logo {
+            display: flex; align-items: center; gap: 0.75rem;
+            text-decoration: none;
+        }
+        .logo-text {
+            font-family: var(--font-serif);
+            font-size: 1.5rem; font-weight: 900;
+            letter-spacing: 0.15em; text-transform: uppercase;
+            color: var(--gold);
+        }
+        .logo-sub {
+            font-size: 0.65rem; font-weight: 500;
+            letter-spacing: 0.25em; text-transform: uppercase;
+            color: var(--muted);
+            border-left: 1px solid #333;
+            padding-left: 0.75rem; margin-left: 0.25rem;
+        }
+        .back-site-btn {
+            color: var(--muted); text-decoration: none; font-size: 0.75rem;
+            font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+            display: flex; align-items: center; gap: 0.5rem;
+            transition: color 0.3s;
+        }
+        .back-site-btn:hover { color: var(--gold); }
+
+        /* ── GRID LAYOUT ── */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+        }
+        @media (max-width: 992px) {
+            .dashboard-grid { grid-template-columns: 1fr; }
+        }
+
+        /* ── CARDS ── */
+        .card {
+            background: var(--graphite);
+            border: 1px solid var(--border);
+            padding: 2rem;
+            position: relative;
+            margin-bottom: 2rem;
+        }
+        .card::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+        .card-title {
+            font-size: 1.2rem; margin-bottom: 1.5rem; font-family: var(--font-serif);
+            display: flex; align-items: center; gap: 0.75rem;
+        }
+        .card-title i { color: var(--gold); }
+
+        /* ── FORMS ── */
+        .form-group { margin-bottom: 1.25rem; }
+        .form-label {
+            display: block; font-size: 0.65rem; text-transform: uppercase;
+            letter-spacing: 0.15em; color: var(--muted); margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        .form-input, .form-select {
+            width: 100%; background: var(--black);
+            border: 1px solid rgba(255,255,255,0.08);
+            color: #fff; padding: 0.85rem 1rem;
+            font-size: 0.85rem; font-family: var(--font-sans);
+            transition: border-color 0.25s;
+        }
+        .form-input:focus, .form-select:focus { outline: none; border-color: rgba(197,160,89,0.5); }
+        
+        .btn-submit {
+            width: 100%; background: var(--gold); border: none;
+            color: var(--black); font-size: 0.75rem; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 0.15em;
+            padding: 1rem; cursor: pointer; transition: all 0.3s;
+            display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+        }
+        .btn-submit:hover:not(:disabled) { background: var(--gold-light); box-shadow: 0 0 15px rgba(197,160,89,0.25); }
+        .btn-submit:disabled { opacity: 0.3; cursor: not-allowed; }
+
+        /* Time slots grid */
+        .block-slots-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(65px, 1fr));
+            gap: 0.4rem; max-height: 180px; overflow-y: auto;
+            padding-right: 0.25rem; margin-bottom: 1.5rem;
+        }
+        .block-slots-grid::-webkit-scrollbar { width: 3px; }
+        .block-slots-grid::-webkit-scrollbar-thumb { background: rgba(197,160,89,0.15); }
+        .block-slot-btn {
+            padding: 0.5rem 0; background: var(--black);
+            border: 1px solid rgba(255,255,255,0.04);
+            color: var(--muted); font-size: 0.7rem; text-align: center;
+            cursor: pointer; transition: all 0.2s;
+        }
+        .block-slot-btn:hover:not(:disabled) { border-color: rgba(197,160,89,0.3); color: #fff; }
+        .block-slot-btn.selected { border-color: var(--gold); background: rgba(197,160,89,0.1); color: var(--gold); }
+        .block-slot-btn:disabled { opacity: 0.15; cursor: not-allowed; text-decoration: line-through; border-color: transparent; }
+
+        /* ── TABLE ── */
+        .table-responsive { width: 100%; overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; min-width: 700px; text-align: left; }
+        th {
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            padding: 1rem; font-size: 0.65rem; text-transform: uppercase;
+            letter-spacing: 0.15em; color: var(--muted); font-weight: 600;
+        }
+        td { padding: 1.25rem 1rem; border-bottom: 1px solid rgba(255,255,255,0.04); font-size: 0.85rem; vertical-align: top; }
+        tr:hover td { background: rgba(255,255,255,0.02); }
+
+        .time-badge { font-family: var(--font-serif); font-size: 1.1rem; color: var(--gold); display: block; line-height: 1.2; }
+        .date-text { font-size: 0.75rem; color: var(--muted); }
+        
+        .client-name { font-weight: 500; color: #fff; display: block; }
+        .client-phone { font-size: 0.75rem; color: var(--muted); font-family: monospace; display: block; margin-top: 0.15rem; }
+
+        .service-badge {
+            background: var(--black); border: 1px solid rgba(255,255,255,0.06);
+            padding: 0.2rem 0.5rem; font-size: 0.7rem; color: var(--cream);
+            display: inline-block; margin-bottom: 0.35rem;
+        }
+        .block-badge {
+            background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.2);
+            padding: 0.2rem 0.5rem; font-size: 0.7rem; color: #ef4444;
+            display: inline-block; font-weight: 600;
+        }
+        .prof-badge { font-size: 0.75rem; color: var(--muted); display: block; }
+
+        .btn-cancel {
+            background: transparent; border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #ef4444; padding: 0.4rem 0.75rem; font-size: 0.65rem;
+            text-transform: uppercase; letter-spacing: 0.08em; cursor: pointer;
+            transition: all 0.25s;
+        }
+        .btn-cancel:hover { background: #ef4444; color: #fff; border-color: #ef4444; }
+
+        .btn-whatsapp {
+            background: rgba(37, 211, 102, 0.1); border: 1px solid rgba(37, 211, 102, 0.2);
+            color: #25d366; padding: 0.4rem 0.75rem; font-size: 0.65rem;
+            text-transform: uppercase; letter-spacing: 0.08em; cursor: pointer;
+            transition: all 0.25s; text-decoration: none; display: inline-flex; align-items: center; gap: 0.25rem;
+            margin-right: 0.5rem;
+        }
+        .btn-whatsapp:hover { background: #25d366; color: #fff; border-color: #25d366; }
+
+        /* Stats box */
+        .stats-row {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem; margin-bottom: 2.5rem;
+        }
+        .stat-card {
+            background: var(--graphite); border: 1px solid var(--border);
+            padding: 1.5rem; display: flex; align-items: center; justify-content: space-between;
+        }
+        .stat-val { font-family: var(--font-serif); font-size: 2.2rem; font-weight: 700; color: var(--gold); }
+        .stat-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--muted); }
+
+        /* ── SECURITY LOGIN OVERLAY ── */
+        #login-overlay {
+            position: fixed; inset: 0; background: var(--black);
+            z-index: 10000; display: flex; align-items: center; justify-content: center;
+            padding: 1.5rem; transition: opacity 0.5s ease;
+        }
+        .login-box {
+            background: var(--graphite); border: 1px solid var(--border);
+            padding: 3rem 2.5rem; max-width: 400px; width: 100%;
+            text-align: center; box-shadow: 0 30px 90px rgba(0,0,0,0.8);
+            position: relative;
+        }
+        .login-box::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+            background: linear-gradient(90deg, var(--bronze), var(--gold), var(--gold-light));
+        }
+        .login-icon { font-size: 2.5rem; color: var(--gold); margin-bottom: 1.5rem; }
+        .login-title { font-family: var(--font-serif); font-size: 1.5rem; margin-bottom: 0.5rem; }
+        .login-desc { font-size: 0.8rem; color: var(--muted); margin-bottom: 2rem; }
+        .login-error { color: #ef4444; font-size: 0.75rem; margin-top: 0.5rem; display: none; }
+
+        /* ── TEAM PERFORMANCE ── */
+        .barber-stat-row {
+            margin-bottom: 1.25rem;
+        }
+        .barber-info {
+            display: flex; justify-content: space-between; align-items: center;
+            font-size: 0.85rem; margin-bottom: 0.35rem;
+        }
+        .barber-name {
+            font-weight: 500; color: #fff;
+        }
+        .barber-count {
+            color: var(--gold-light); font-size: 0.75rem; font-weight: 600;
+        }
+        .barber-progress-bar-bg {
+            width: 100%; height: 6px; background: var(--black);
+            border: 1px solid rgba(255,255,255,0.04);
+            border-radius: 3px; overflow: hidden;
+        }
+        .barber-progress-bar-fill {
+            height: 100%; width: 0%;
+            background: linear-gradient(90deg, var(--bronze), var(--gold));
+            transition: width 0.6s var(--ease-smooth);
+            border-radius: 3px;
+        }
+        .barber-revenue {
+            font-size: 0.7rem; color: var(--muted); text-align: right; margin-top: 0.15rem;
+        }
+
+        /* ── CONFIG TABS ── */
+        .btn-tab-config.active {
+            color: var(--gold) !important;
+            border-bottom-color: var(--gold) !important;
+        }
+        .btn-tab-config:hover {
+            color: var(--gold-light) !important;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- LOGIN SCREEN -->
+    <div id="login-overlay">
+        <div class="login-box">
+            <div class="login-icon"><i class="fas fa-lock"></i></div>
+            <h2 class="login-title">Acesso Restrito</h2>
+            <p class="login-desc">Painel Administrativo da Dubai Barbearia Itu. Insira a senha de administrador.</p>
+            
+            <div class="form-group">
+                <input type="password" id="admin-password" class="form-input" placeholder="Senha de Acesso" style="text-align:center;">
+                <div class="login-error" id="login-error-msg">Senha incorreta. Tente novamente.</div>
+            </div>
+            
+            <button id="login-btn" class="btn-submit" style="margin-top:1rem;">Entrar no Painel</button>
+        </div>
+    </div>
+
+    <!-- MAIN DASHBOARD CONTENT -->
+    <div class="container">
+        
+        <!-- Header -->
+        <header class="header">
+            <a href="index.html" class="logo">
+                <span class="logo-text">Dubai</span>
+                <span class="logo-sub">Painel Admin</span>
+            </a>
+            <a href="index.html" class="back-site-btn">
+                <i class="fas fa-arrow-left"></i> Voltar ao Site
+            </a>
+        </header>
+
+        <!-- Stats -->
+        <div class="stats-row" style="margin-bottom: 1.5rem;">
+            <div class="stat-card">
+                <div>
+                    <span class="stat-label">Total Agendamentos</span>
+                    <div class="stat-val" id="stat-total">0</div>
+                </div>
+                <i class="fas fa-calendar-alt fa-2x" style="color:rgba(197,160,89,0.2)"></i>
+            </div>
+            <div class="stat-card">
+                <div>
+                    <span class="stat-label">Ativos esta Semana</span>
+                    <div class="stat-val" id="stat-week">0</div>
+                </div>
+                <i class="fas fa-clock fa-2x" style="color:rgba(197,160,89,0.2)"></i>
+            </div>
+            <div class="stat-card">
+                <div>
+                    <span class="stat-label">Horários Bloqueados</span>
+                    <div class="stat-val" id="stat-blocks">0</div>
+                </div>
+                <i class="fas fa-ban fa-2x" style="color:rgba(239, 68, 68, 0.2)"></i>
+            </div>
+        </div>
+
+        <!-- Billing Stats Row -->
+        <div class="stats-row" style="margin-bottom: 2.5rem;">
+            <div class="stat-card">
+                <div>
+                    <span class="stat-label">Faturamento Semanal</span>
+                    <div class="stat-val" id="stat-rev-week" style="color: var(--gold-light)">R$ 0,00</div>
+                </div>
+                <i class="fas fa-money-bill-wave fa-2x" style="color:rgba(197,160,89,0.2)"></i>
+            </div>
+            <div class="stat-card">
+                <div>
+                    <span class="stat-label">Faturamento Mensal</span>
+                    <div class="stat-val" id="stat-rev-month" style="color: var(--gold-light)">R$ 0,00</div>
+                </div>
+                <i class="fas fa-chart-line fa-2x" style="color:rgba(197,160,89,0.2)"></i>
+            </div>
+            <div class="stat-card">
+                <div>
+                    <span class="stat-label">Faturamento Acumulado</span>
+                    <div class="stat-val" id="stat-rev-total" style="color: var(--gold-light)">R$ 0,00</div>
+                </div>
+                <i class="fas fa-coins fa-2x" style="color:rgba(197,160,89,0.2)"></i>
+            </div>
+        </div>
+
+        <!-- Layout Grid -->
+        <div class="dashboard-grid">
+            
+            <!-- Bookings List -->
+            <div class="card">
+                <h2 class="card-title"><i class="fas fa-list-ul"></i> Próximos Agendamentos</h2>
+                
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Data / Hora</th>
+                                <th>Cliente &amp; Contato</th>
+                                <th>Serviço / Profissional</th>
+                                <th style="text-align: right;">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="bookings-table-body">
+                            <!-- Populated dynamically by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Block slots Sidebar -->
+            <div class="card">
+                <h2 class="card-title"><i class="fas fa-ban"></i> Bloquear Horário</h2>
+                <p class="date-text" style="margin-top: -1rem; margin-bottom: 1.5rem; font-size: 0.75rem;">
+                    Impeça agendamentos em horários específicos (como almoço, folgas, etc).
+                </p>
+                
+                <form id="block-form">
+                    <div class="form-group">
+                        <label class="form-label">1. Profissional</label>
+                        <select id="block-prof" class="form-select">
+                            <option value="">Selecione...</option>
+                            <option value="1">Julio</option>
+                            <option value="2">Matheus</option>
+                            <option value="3">Thiago</option>
+                            <option value="4">Luan</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">2. Data</label>
+                        <input type="date" id="block-date" class="form-input">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">3. Horário</label>
+                        <div id="block-slots-container" style="display:none;">
+                            <div class="block-slots-grid" id="block-slots-grid">
+                                <!-- Slots populated dynamically by JS -->
+                            </div>
+                        </div>
+                        <div id="block-slots-placeholder" class="date-text" style="text-align:center; background: var(--black); padding: 1.5rem; border: 1px solid rgba(255,255,255,0.03);">
+                            Selecione profissional e data para ver horários.
+                        </div>
+                    </div>
+
+                    <button type="submit" id="submit-block-btn" class="btn-submit" disabled>
+                        <i class="fas fa-lock"></i> Bloquear Horário
+                    </button>
+                </form>
+            </div>
+
+            <!-- Desempenho da Equipe -->
+            <div class="card">
+                <h2 class="card-title"><i class="fas fa-users"></i> Desempenho da Equipe</h2>
+                <p class="date-text" style="margin-top: -1rem; margin-bottom: 1.5rem; font-size: 0.75rem;">
+                    Total de cortes realizados/agendados e faturamento acumulado por barbeiro.
+                </p>
+                <div id="barber-stats-list">
+                    <!-- Dynamic progress bars generated by JS -->
+                </div>
+            </div>
+
+        </div>
+
+        <!-- CONFIGURATIONS CARD -->
+        <div class="card" style="margin-top: 2rem;">
+            <h2 class="card-title"><i class="fas fa-cog"></i> Configurações do Estabelecimento</h2>
+            <p class="date-text" style="margin-top: -1rem; margin-bottom: 2rem; font-size: 0.75rem;">
+                Gerencie a equipe de barbeiros e personalize a tabela de preços dos rituais.
+            </p>
+
+            <!-- Config Tabs -->
+            <div style="display: flex; gap: 1rem; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 1rem; margin-bottom: 2rem;">
+                <button id="tab-btn-barbers" class="btn-tab-config active" onclick="switchConfigTab('barbers')" style="background: none; border: none; color: var(--gold); border-bottom: 2px solid var(--gold); padding: 0.5rem 1rem; font-weight: 600; cursor: pointer; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.08em; transition: all 0.25s;">
+                    Equipe de Barbeiros
+                </button>
+                <button id="tab-btn-prices" class="btn-tab-config" onclick="switchConfigTab('prices')" style="background: none; border: none; color: var(--muted); border-bottom: 2px solid transparent; padding: 0.5rem 1rem; font-weight: 600; cursor: pointer; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.08em; transition: all 0.25s;">
+                    Tabela de Preços
+                </button>
+            </div>
+
+            <!-- Barbers Section -->
+            <div id="config-section-barbers">
+                <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 2rem;">
+                    <!-- Barbers List -->
+                    <div>
+                        <h3 style="font-size: 0.9rem; margin-bottom: 1rem; font-family: var(--font-sans); text-transform: uppercase; color: var(--gold-light);">Barbeiros Cadastrados</h3>
+                        <div class="table-responsive">
+                            <table style="min-width: 500px;">
+                                <thead>
+                                    <tr>
+                                        <th style="padding: 0.5rem; text-align: left;">Nome</th>
+                                        <th style="padding: 0.5rem; text-align: left;">Cargo / Especialidade</th>
+                                        <th style="padding: 0.5rem; text-align: left;">Status</th>
+                                        <th style="padding: 0.5rem; text-align: right;">Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="config-barbers-table-body">
+                                    <!-- Rendered dynamically -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- Add/Edit Barber Form -->
+                    <div style="background: var(--black); padding: 1.5rem; border: 1px solid rgba(255,255,255,0.03);">
+                        <h3 id="barber-form-title" style="font-size: 0.9rem; margin-bottom: 1.25rem; font-family: var(--font-sans); text-transform: uppercase; color: var(--gold-light);">Cadastrar Barbeiro</h3>
+                        <form id="barber-config-form">
+                            <input type="hidden" id="edit-barber-id" value="">
+                            <div class="form-group">
+                                <label class="form-label">Nome Completo</label>
+                                <input type="text" id="barber-name-input" class="form-input" placeholder="Ex: Pedro Silva" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Cargo / Especialidade</label>
+                                <input type="text" id="barber-role-input" class="form-input" placeholder="Ex: Hair Stylist" required>
+                            </div>
+                            <div style="display: flex; gap: 0.5rem; margin-top: 1.5rem;">
+                                <button type="submit" id="barber-save-btn" class="btn-submit" style="padding: 0.75rem;">
+                                    Salvar Profissional
+                                </button>
+                                <button type="button" id="barber-cancel-edit-btn" class="btn-cancel" style="display: none; padding: 0.75rem; border-color: var(--muted); color: var(--muted);" onclick="cancelBarberEdit()">
+                                    Cancelar
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Prices Section -->
+            <div id="config-section-prices" style="display: none;">
+                <h3 style="font-size: 0.9rem; margin-bottom: 1.25rem; font-family: var(--font-sans); text-transform: uppercase; color: var(--gold-light);">Alterar Preço dos Rituais</h3>
+                <form id="prices-config-form">
+                    <div id="prices-inputs-container" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.25rem; margin-bottom: 2rem;">
+                        <!-- Dynamically generated inputs grouped by category -->
+                    </div>
+                    <button type="submit" class="btn-submit" style="max-width: 250px;">
+                        <i class="fas fa-save"></i> Gravar Tabela de Preços
+					</button>
+				</form>
+			</div>
+		</div>
+
+    </div>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        // ── SECURITY PASSWORD CHECK ──
+        const passwordInput = document.getElementById('admin-password');
+        const loginBtn = document.getElementById('login-btn');
+        const loginOverlay = document.getElementById('login-overlay');
+        const loginErrorMsg = document.getElementById('login-error-msg');
+
+        // Simple auth check
+        function checkPassword() {
+            if (passwordInput.value === 'admin') {
+                loginOverlay.style.opacity = '0';
+                setTimeout(() => {
+                    loginOverlay.style.display = 'none';
+                }, 500);
+                loadDashboard();
+            } else {
+                loginErrorMsg.style.display = 'block';
+                passwordInput.value = '';
+                passwordInput.focus();
+            }
+        }
+
+        loginBtn.addEventListener('click', checkPassword);
+        passwordInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') checkPassword();
+        });
+
+        // Focus password input on load
+        window.addEventListener('DOMContentLoaded', () => {
+            passwordInput.focus();
+        });
+
+        // ── DASHBOARD ENGINE ──
+        function getBarbersList() {
+            const stored = localStorage.getItem('dubai_barbers');
+            if (stored) {
+                try {
+                    const parsed = JSON.parse(stored);
+                    const data = {};
+                    parsed.forEach(b => {
+                        data[b.id] = b.name;
+                    });
+                    data['any'] = 'Qualquer Profissional';
+                    return data;
+                } catch(e) {
+                    console.error("Error loading barbers:", e);
+                }
+            }
+            return {
+                '1': 'Julio',
+                '2': 'Matheus',
+                '3': 'Thiago',
+                '4': 'Luan',
+                'any': 'Qualquer Profissional'
+            };
+        }
+
+        const servicesData = {
+            '1': 'Corte Clássico & Moderno',
+            '2': 'Corte em Degradê (Fade)',
+            '3': 'Especialista em Penteados Afro',
+            '4': 'Cabelos Cacheados',
+            '5': 'Corte de Cabelo Longo',
+            '6': 'Corte Kids (Crianças)',
+            '7': 'Raspar o Cabelo / Cabeça',
+            '8': 'Coloração de Cabelo',
+            '9': 'Barba com Toalha Quente',
+            '10': 'Aparar & Manutenção de Barba',
+            '11': 'Barboterapia Clássica',
+            '12': 'Condicionamento & Hidratação',
+            '13': 'Pigmentação na Barba',
+            '14': 'O Combo Dubai',
+            '15': 'Combo Completo',
+            '16': 'Corte + Sobrancelha',
+            '17': 'Consultoria de Visagismo',
+            '18': 'Dia do Noivo',
+            '19': 'Design de Sobrancelha',
+            '20': 'Depilação Nariz / Orelha',
+            '21': 'Limpeza de Pele Tradicional',
+            '22': 'Limpeza de Pele Profunda',
+            '23': 'Extração de Cravos & Esfoliação',
+            '24': 'Hidratação Capilar',
+            '25': 'Progressiva / Desondulação',
+            'bloqueio_manual': 'Bloqueio Manual'
+        };
+
+        const defaultPrices = {
+            '1': 50, '2': 50, '3': 50, '4': 50, '5': 60, '6': 50, '7': 30, '8': 60,
+            '9': 45, '10': 30, '11': 80, '12': 30, '13': 30, '14': 100, '15': 115,
+            '16': 65, '17': 0, '18': 0, '19': 20, '20': 35, '21': 75, '22': 75,
+            '23': 50, '24': 30, '25': 85, 'bloqueio_manual': 0
+        };
+
+        function getCustomPrices() {
+            const stored = localStorage.getItem('dubai_prices');
+            if (stored) {
+                try {
+                    const parsed = JSON.parse(stored);
+                    parsed['bloqueio_manual'] = 0;
+                    return parsed;
+                } catch(e) {
+                    console.error("Error loading custom prices:", e);
+                }
+            }
+            return defaultPrices;
+        }
+
+        let professionalsData = getBarbersList();
+        let servicePrices = getCustomPrices();
+
+        function isCurrentWeek(dateStr) {
+            const bookingDate = new Date(dateStr + 'T00:00:00');
+            const today = new Date();
+            
+            const currentDay = today.getDay(); // 0 = Sun, 1 = Mon, ..., 6 = Sat
+            const distanceToMonday = currentDay === 0 ? -6 : 1 - currentDay;
+            
+            const startOfWeek = new Date(today);
+            startOfWeek.setDate(today.getDate() + distanceToMonday);
+            startOfWeek.setHours(0, 0, 0, 0);
+            
+            const endOfWeek = new Date(startOfWeek);
+            endOfWeek.setDate(startOfWeek.getDate() + 6);
+            endOfWeek.setHours(23, 59, 59, 999);
+            
+            return bookingDate >= startOfWeek && bookingDate <= endOfWeek;
+        }
+
+        function isCurrentMonth(dateStr) {
+            const bookingDate = new Date(dateStr + 'T00:00:00');
+            const today = new Date();
+            return bookingDate.getMonth() === today.getMonth() && bookingDate.getFullYear() === today.getFullYear();
+        }
+
+        // Load statistics and table entries
+        function loadDashboard() {
+            const bookings = JSON.parse(localStorage.getItem('dubai_bookings') || '[]');
+            
+            // Sort bookings by date and time
+            bookings.sort((a, b) => {
+                return new Date(`${a.date}T${a.time}`).getTime() - new Date(`${b.date}T${b.time}`).getTime();
+            });
+
+            // Calculate statistics
+            const total = bookings.length;
+            const blocks = bookings.filter(b => b.serviceId === 'bloqueio_manual').length;
+            
+            // Calculate bookings active this week
+            const today = new Date();
+            const oneWeekLater = new Date();
+            oneWeekLater.setDate(today.getDate() + 7);
+            
+            const weekActive = bookings.filter(b => {
+                const bDate = new Date(b.date + 'T00:00:00');
+                return bDate >= today && bDate <= oneWeekLater && b.serviceId !== 'bloqueio_manual';
+            }).length;
+
+            document.getElementById('stat-total').innerText = total;
+            document.getElementById('stat-week').innerText = weekActive;
+            document.getElementById('stat-blocks').innerText = blocks;
+
+            // Calculate revenues
+            let revWeek = 0;
+            let revMonth = 0;
+            let revTotal = 0;
+
+            // Calculate cuts count and revenue per barber
+            const barberStats = {};
+            const stored = localStorage.getItem('dubai_barbers');
+            let barbersListObj = [];
+            if (stored) {
+                try { barbersListObj = JSON.parse(stored); } catch(e){}
+            }
+            if (barbersListObj.length === 0) {
+                barbersListObj = [
+                    { id: "1", name: "Julio", role: "Master Barber", active: true },
+                    { id: "2", name: "Matheus", role: "Especialista em Barba", active: true },
+                    { id: "3", name: "Thiago", role: "Hair Stylist", active: true },
+                    { id: "4", name: "Luan", role: "Skin Care Expert", active: true }
+                ];
+            }
+            
+            barbersListObj.forEach(b => {
+                barberStats[b.id] = { count: 0, revenue: 0, name: b.name, role: b.role, active: b.active };
+            });
+            barberStats['any'] = { count: 0, revenue: 0, name: 'Qualquer Profissional', role: 'Profissional Disponível', active: true };
+
+            bookings.forEach(b => {
+                if (b.serviceId === 'bloqueio_manual') return; // Exclude blocks from calculations
+                
+                const price = servicePrices[b.serviceId] || 0;
+                revTotal += price;
+                if (isCurrentWeek(b.date)) {
+                    revWeek += price;
+                }
+                if (isCurrentMonth(b.date)) {
+                    revMonth += price;
+                }
+
+                if (barberStats[b.professionalId]) {
+                    barberStats[b.professionalId].count += 1;
+                    barberStats[b.professionalId].revenue += price;
+                } else {
+                    barberStats[b.professionalId] = {
+                        count: 1,
+                        revenue: price,
+                        name: professionalsData[b.professionalId] || `Profissional #${b.professionalId}`,
+                        role: 'Barbeiro Inativo',
+                        active: false
+                    };
+                }
+            });
+
+            document.getElementById('stat-rev-week').innerText = `R$ ${revWeek.toFixed(2).replace('.', ',')}`;
+            document.getElementById('stat-rev-month').innerText = `R$ ${revMonth.toFixed(2).replace('.', ',')}`;
+            document.getElementById('stat-rev-total').innerText = `R$ ${revTotal.toFixed(2).replace('.', ',')}`;
+
+            // Render team performance progress bars
+            const counts = Object.values(barberStats).map(s => s.count);
+            const maxCuts = Math.max(...counts, 1);
+            
+            const barberStatsList = document.getElementById('barber-stats-list');
+            if (barberStatsList) {
+                barberStatsList.innerHTML = Object.keys(barberStats)
+                    .filter(pId => barberStats[pId].active || barberStats[pId].count > 0)
+                    .map(pId => {
+                        const stat = barberStats[pId];
+                        const percentage = (stat.count / maxCuts) * 100;
+                        return `
+                            <div class="barber-stat-row">
+                                <div class="barber-info">
+                                    <span class="barber-name">${stat.name} <span style="font-size:0.65rem; color:var(--muted); font-weight:normal;">(${stat.role})${stat.active === false ? ' <span style="color:#ef4444">(Inativo)</span>' : ''}</span></span>
+                                    <span class="barber-count">${stat.count} ${stat.count === 1 ? 'corte' : 'cortes'}</span>
+                                </div>
+                                <div class="barber-progress-bar-bg">
+                                    <div class="barber-progress-bar-fill" style="width: ${percentage}%"></div>
+                                </div>
+                                <div class="barber-revenue">
+                                    Receita Gerada: R$ ${stat.revenue.toFixed(2).replace('.', ',')}
+                                </div>
+                            </div>
+                        `;
+                    }).join('');
+            }
+
+            // Render table
+            const tbody = document.getElementById('bookings-table-body');
+            if (bookings.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="4" style="text-align:center; padding: 3rem; color: var(--muted)">
+                            Nenhum agendamento encontrado no banco local.
+                        </td>
+                    </tr>
+                `;
+            } else {
+                tbody.innerHTML = bookings.map(b => {
+                    const isBlock = b.serviceId === 'bloqueio_manual';
+                    const dateFormatted = b.date.split('-').reverse().join('/');
+                    const profName = professionalsData[b.professionalId] || b.professionalId;
+                    const serviceName = servicesData[b.serviceId] || b.serviceId;
+
+                    // WhatsApp link generator
+                    const cleanPhone = b.phone.replace(/\D/g, '');
+                    const phoneWithCountry = cleanPhone.startsWith('55') ? cleanPhone : (cleanPhone.length >= 10 ? `55${cleanPhone}` : cleanPhone);
+                    const waMessage = `Olá ${b.name}, aqui é da Dubai Barbearia Itu! Seu agendamento para *${serviceName}* com *${profName}* no dia *${dateFormatted}* às *${b.time}* está confirmado. Te esperamos!`;
+                    const waLink = `https://wa.me/${phoneWithCountry}?text=${encodeURIComponent(waMessage)}`;
+
+                    return `
+                        <tr>
+                            <td>
+                                <span class="time-badge">${b.time}</span>
+                                <span class="date-text">${dateFormatted}</span>
+                            </td>
+                            <td>
+                                ${isBlock ? '<span class="block-badge">HORÁRIO BLOQUEADO</span>' : `
+                                    <span class="client-name">${b.name}</span>
+                                    <span class="client-phone">${b.phone}</span>
+                                `}
+                            </td>
+                            <td>
+                                <span class="service-badge">${serviceName}</span>
+                                <span class="prof-badge"><i class="far fa-user" style="margin-right:0.25rem;"></i>${profName}</span>
+                            </td>
+                            <td style="text-align: right; white-space: nowrap;">
+                                ${isBlock ? '' : `
+                                    <a href="${waLink}" target="_blank" class="btn-whatsapp">
+                                        <i class="fab fa-whatsapp"></i> Confirmar
+                                    </a>
+                                `}
+                                <button onclick="cancelBooking('${b.id}')" class="btn-cancel">
+                                    Cancelar
+                                </button>
+                            </td>
+                        </tr>
+                    `;
+                }).join('');
+            }
+        }
+
+        // Cancel booking
+        window.cancelBooking = function(id) {
+            if (confirm("Deseja realmente cancelar este agendamento/bloqueio?")) {
+                const bookings = JSON.parse(localStorage.getItem('dubai_bookings') || '[]');
+                const filtered = bookings.filter(b => b.id !== id);
+                localStorage.setItem('dubai_bookings', JSON.stringify(filtered));
+                loadDashboard();
+                
+                // Re-evaluate slots sidebar if open
+                if (selectedBlockDate && selectedBlockProf) {
+                    renderBlockSlots();
+                }
+            }
+        };
+
+        // ── BLOCK SLOTS ENGINE ──
+        let selectedBlockProf = '';
+        let selectedBlockDate = '';
+        let selectedBlockTime = '';
+
+        const blockProfSelect = document.getElementById('block-prof');
+        const blockDateInput = document.getElementById('block-date');
+        const blockSlotsGrid = document.getElementById('block-slots-grid');
+        const blockSlotsContainer = document.getElementById('block-slots-container');
+        const blockSlotsPlaceholder = document.getElementById('block-slots-placeholder');
+        const submitBlockBtn = document.getElementById('submit-block-btn');
+
+        // Set min date to today
+        blockDateInput.min = new Date().toISOString().split('T')[0];
+
+        function getAvailableTimeSlots(dateString) {
+            const d = new Date(dateString + 'T00:00:00');
+            const dayOfWeek = d.getDay();
+            if (dayOfWeek === 0) return []; // Sunday closed
+            
+            let startHour = 9;
+            let endHour = 20;
+            if (dayOfWeek === 6) { // Saturday
+                startHour = 8;
+                endHour = 18;
+            }
+            
+            const slots = [];
+            for (let h = startHour; h < endHour; h++) {
+                slots.push(`${h.toString().padStart(2, '0')}:00`);
+                slots.push(`${h.toString().padStart(2, '0')}:30`);
+            }
+            return slots;
+        }
+
+        function isSlotAvailable(date, time, profId) {
+            const bookings = JSON.parse(localStorage.getItem('dubai_bookings') || '[]');
+            return !bookings.some(b => b.date === date && b.time === time && b.professionalId === profId);
+        }
+
+        function renderBlockSlots() {
+            selectedBlockProf = blockProfSelect.value;
+            selectedBlockDate = blockDateInput.value;
+            selectedBlockTime = '';
+            submitBlockBtn.setAttribute('disabled', 'true');
+
+            if (!selectedBlockProf || !selectedBlockDate) {
+                blockSlotsContainer.style.display = 'none';
+                blockSlotsPlaceholder.style.display = 'block';
+                return;
+            }
+
+            const slots = getAvailableTimeSlots(selectedBlockDate);
+            if (slots.length === 0) {
+                blockSlotsPlaceholder.innerText = 'Sem horários disponíveis (Domingo fechado).';
+                blockSlotsPlaceholder.style.display = 'block';
+                blockSlotsContainer.style.display = 'none';
+                return;
+            }
+
+            blockSlotsPlaceholder.style.display = 'none';
+            blockSlotsContainer.style.display = 'block';
+
+            blockSlotsGrid.innerHTML = slots.map(time => {
+                const available = isSlotAvailable(selectedBlockDate, time, selectedBlockProf);
+                return `
+                    <button type="button" class="block-slot-btn" data-time="${time}" ${!available ? 'disabled' : ''}>
+                        ${time}
+                    </button>
+                `;
+            }).join('');
+
+            blockSlotsGrid.querySelectorAll('.block-slot-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    blockSlotsGrid.querySelectorAll('.block-slot-btn').forEach(b => b.classList.remove('selected'));
+                    btn.classList.add('selected');
+                    selectedBlockTime = btn.getAttribute('data-time');
+                    submitBlockBtn.removeAttribute('disabled');
+                });
+            });
+        }
+
+        blockProfSelect.addEventListener('change', renderBlockSlots);
+        blockDateInput.addEventListener('change', renderBlockSlots);
+
+        // Submit block slot
+        document.getElementById('block-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            if (!selectedBlockDate || !selectedBlockProf || !selectedBlockTime) return;
+
+            const bookings = JSON.parse(localStorage.getItem('dubai_bookings') || '[]');
+            const newBlock = {
+                id: Math.random().toString(36).substring(2, 11),
+                serviceId: 'bloqueio_manual',
+                professionalId: selectedBlockProf,
+                date: selectedBlockDate,
+                time: selectedBlockTime,
+                name: 'BLOQUEADO (Admin)',
+                phone: '-'
+            };
+
+            bookings.push(newBlock);
+            localStorage.setItem('dubai_bookings', JSON.stringify(bookings));
+            
+            // Reload dashboard and reset slot
+            loadDashboard();
+            renderBlockSlots();
+        });
+
+        // ── CONFIGURATIONS ENGINE ──
+        function loadBarbersFromStorage() {
+            const stored = localStorage.getItem('dubai_barbers');
+            if (stored) {
+                try {
+                    return JSON.parse(stored);
+                } catch(e) {}
+            }
+            const defaults = [
+                { id: "1", name: "Julio", role: "Master Barber", active: true },
+                { id: "2", name: "Matheus", role: "Especialista em Barba", active: true },
+                { id: "3", name: "Thiago", role: "Hair Stylist", active: true },
+                { id: "4", name: "Luan", role: "Skin Care Expert", active: true }
+            ];
+            localStorage.setItem('dubai_barbers', JSON.stringify(defaults));
+            return defaults;
+        }
+
+        function saveBarbersToStorage(barbers) {
+            localStorage.setItem('dubai_barbers', JSON.stringify(barbers));
+            professionalsData = getBarbersList();
+            loadDashboard();
+            renderBlockProfSelect();
+            renderBarbersConfigTable();
+        }
+
+        window.switchConfigTab = function(tab) {
+            const btnBarbers = document.getElementById('tab-btn-barbers');
+            const btnPrices = document.getElementById('tab-btn-prices');
+            const secBarbers = document.getElementById('config-section-barbers');
+            const secPrices = document.getElementById('config-section-prices');
+
+            if (tab === 'barbers') {
+                btnBarbers.classList.add('active');
+                btnPrices.classList.remove('active');
+                secBarbers.style.display = 'block';
+                secPrices.style.display = 'none';
+            } else {
+                btnPrices.classList.add('active');
+                btnBarbers.classList.remove('active');
+                secBarbers.style.display = 'none';
+                secPrices.style.display = 'block';
+            }
+        };
+
+        function renderBarbersConfigTable() {
+            const tbody = document.getElementById('config-barbers-table-body');
+            if (!tbody) return;
+            const barbers = loadBarbersFromStorage();
+
+            tbody.innerHTML = barbers.map(b => {
+                const statusBadge = b.active !== false 
+                    ? '<span style="color:#25d366; font-size:0.7rem; font-weight:600; text-transform:uppercase;">Ativo</span>'
+                    : '<span style="color:#ef4444; font-size:0.7rem; font-weight:600; text-transform:uppercase;">Inativo</span>';
+                
+                const toggleLabel = b.active !== false ? 'Desativar' : 'Ativar';
+                const toggleColor = b.active !== false ? '#ef4444' : '#25d366';
+
+                return `
+                    <tr>
+                        <td style="padding: 0.75rem 0.5rem; border-bottom: 1px solid rgba(255,255,255,0.02); font-weight:500; color:#fff;">${b.name}</td>
+                        <td style="padding: 0.75rem 0.5rem; border-bottom: 1px solid rgba(255,255,255,0.02); color:var(--muted);">${b.role}</td>
+                        <td style="padding: 0.75rem 0.5rem; border-bottom: 1px solid rgba(255,255,255,0.02);">${statusBadge}</td>
+                        <td style="padding: 0.75rem 0.5rem; border-bottom: 1px solid rgba(255,255,255,0.02); text-align: right; white-space: nowrap;">
+                            <button onclick="editBarber('${b.id}')" class="btn-whatsapp" style="background:none; border:1px solid var(--gold); color:var(--gold); padding:0.25rem 0.5rem; font-size:0.65rem; margin-right:0.25rem;">
+                                Editar
+                            </button>
+                            <button onclick="toggleBarberActive('${b.id}')" class="btn-cancel" style="border-color:${toggleColor}; color:${toggleColor}; padding:0.25rem 0.5rem; font-size:0.65rem;">
+                                ${toggleLabel}
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        window.toggleBarberActive = function(id) {
+            const barbers = loadBarbersFromStorage();
+            const index = barbers.findIndex(b => b.id === id);
+            if (index !== -1) {
+                barbers[index].active = barbers[index].active === false ? true : false;
+                saveBarbersToStorage(barbers);
+            }
+        };
+
+        window.editBarber = function(id) {
+            const barbers = loadBarbersFromStorage();
+            const barber = barbers.find(b => b.id === id);
+            if (barber) {
+                document.getElementById('edit-barber-id').value = barber.id;
+                document.getElementById('barber-name-input').value = barber.name;
+                document.getElementById('barber-role-input').value = barber.role;
+                document.getElementById('barber-form-title').innerText = "Editar Barbeiro";
+                document.getElementById('barber-cancel-edit-btn').style.display = "inline-flex";
+                document.getElementById('barber-name-input').focus();
+            }
+        };
+
+        window.cancelBarberEdit = function() {
+            document.getElementById('edit-barber-id').value = "";
+            document.getElementById('barber-name-input').value = "";
+            document.getElementById('barber-role-input').value = "";
+            document.getElementById('barber-form-title').innerText = "Cadastrar Barbeiro";
+            document.getElementById('barber-cancel-edit-btn').style.display = "none";
+        };
+
+        document.getElementById('barber-config-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const id = document.getElementById('edit-barber-id').value;
+            const name = document.getElementById('barber-name-input').value.trim();
+            const role = document.getElementById('barber-role-input').value.trim();
+            if (!name || !role) return;
+
+            const barbers = loadBarbersFromStorage();
+            if (id) {
+                const index = barbers.findIndex(b => b.id === id);
+                if (index !== -1) {
+                    barbers[index].name = name;
+                    barbers[index].role = role;
+                }
+            } else {
+                const newBarber = {
+                    id: Math.random().toString(36).substring(2, 11),
+                    name: name,
+                    role: role,
+                    active: true
+                };
+                barbers.push(newBarber);
+            }
+
+            saveBarbersToStorage(barbers);
+            cancelBarberEdit();
+        });
+
+        const baseServices = [
+            { id: "1", name: "Corte Clássico & Moderno", category: "cabelo" },
+            { id: "2", name: "Corte em Degradê (Fade)", category: "cabelo" },
+            { id: "3", name: "Especialista em Penteados Afro", category: "cabelo" },
+            { id: "4", name: "Cabelos Cacheados", category: "cabelo" },
+            { id: "5", name: "Corte de Cabelo Longo", category: "cabelo" },
+            { id: "6", name: "Corte Kids (Crianças)", category: "cabelo" },
+            { id: "7", name: "Raspar o Cabelo / Cabeça", category: "cabelo" },
+            { id: "8", name: "Coloração de Cabelo", category: "cabelo" },
+            { id: "9", name: "Barba com Toalha Quente", category: "barba" },
+            { id: "10", name: "Aparar & Manutenção de Barba", category: "barba" },
+            { id: "11", name: "Barboterapia Clássica", category: "barba" },
+            { id: "12", name: "Condicionamento & Hidratação", category: "barba" },
+            { id: "13", name: "Pigmentação na Barba", category: "barba" },
+            { id: "14", name: "O Combo Dubai", category: "combos" },
+            { id: "15", name: "Combo Completo", category: "combos" },
+            { id: "16", name: "Corte + Sobrancelha", category: "combos" },
+            { id: "17", name: "Consultoria de Visagismo", category: "combos" },
+            { id: "18", name: "Dia do Noivo", category: "combos" },
+            { id: "19", name: "Design de Sobrancelha", category: "cuidados" },
+            { id: "20", name: "Depilação Nariz / Orelha", category: "cuidados" },
+            { id: "21", name: "Limpeza de Pele Tradicional", category: "cuidados" },
+            { id: "22", name: "Limpeza de Pele Profunda", category: "cuidados" },
+            { id: "23", name: "Extração de Cravos & Esfoliação", category: "cuidados" },
+            { id: "24", name: "Hidratação Capilar", category: "cuidados" },
+            { id: "25", name: "Progressiva / Desondulação", category: "cuidados" }
+        ];
+
+        const categoryNames = {
+            cabelo: 'Cabelo',
+            barba: 'Barba',
+            combos: 'Combos & Visagismo',
+            cuidados: 'Estética & Cuidados'
+        };
+
+        function renderPricesConfigFields() {
+            const container = document.getElementById('prices-inputs-container');
+            if (!container) return;
+
+            const prices = getCustomPrices();
+            const grouped = {};
+            baseServices.forEach(s => {
+                if (!grouped[s.category]) grouped[s.category] = [];
+                grouped[s.category].push(s);
+            });
+
+            container.innerHTML = Object.keys(grouped).map(catKey => {
+                const title = categoryNames[catKey] || catKey;
+                const fieldsHtml = grouped[catKey].map(s => {
+                    const priceVal = prices[s.id] !== undefined ? prices[s.id] : defaultPrices[s.id];
+                    const suffix = (s.id === '17' || s.id === '18') ? ' (Sob Consulta)' : '';
+                    return `
+                        <div class="form-group" style="margin-bottom:0.75rem;">
+                            <label class="form-label" style="margin-bottom:0.25rem;">${s.name}${suffix}</label>
+                            <div style="display:flex; align-items:center; gap:0.5rem;">
+                                <span style="font-size:0.85rem; color:var(--muted)">R$</span>
+                                <input type="number" data-service-id="${s.id}" min="0" step="1" value="${priceVal}" class="form-input" style="padding:0.5rem 0.75rem;">
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+
+                return `
+                    <div style="background:rgba(255,255,255,0.01); border:1px solid rgba(255,255,255,0.02); padding:1.25rem; display:flex; flex-direction:column; gap:0.5rem;">
+                        <h4 style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--gold); border-bottom:1px solid rgba(197,160,89,0.15); padding-bottom:0.5rem; margin-bottom:0.75rem;">
+                            ${title}
+                        </h4>
+                        ${fieldsHtml}
+                    </div>
+                `;
+            }).join('');
+        }
+
+        document.getElementById('prices-config-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const inputs = document.getElementById('prices-inputs-container').querySelectorAll('input[type="number"]');
+            const newPrices = {};
+
+            inputs.forEach(input => {
+                const id = input.getAttribute('data-service-id');
+                const val = parseFloat(input.value) || 0;
+                newPrices[id] = val;
+            });
+
+            localStorage.setItem('dubai_prices', JSON.stringify(newPrices));
+            servicePrices = getCustomPrices();
+
+            alert("Tabela de preços atualizada com sucesso!");
+            loadDashboard();
+        });
+
+        function renderBlockProfSelect() {
+            const select = document.getElementById('block-prof');
+            if (!select) return;
+            
+            let html = '<option value="">Selecione...</option>';
+            const barbers = loadBarbersFromStorage();
+            
+            barbers.forEach(b => {
+                if (b.active !== false) {
+                    html += `<option value="${b.id}">${b.name}</option>`;
+                }
+            });
+            select.innerHTML = html;
+        }
+
+        // Initialize lists and tables on DOMContentLoaded
+        window.addEventListener('DOMContentLoaded', () => {
+            renderBlockProfSelect();
+            renderBarbersConfigTable();
+            renderPricesConfigFields();
+        });
+    </script>
+
+</body>
+</html>
